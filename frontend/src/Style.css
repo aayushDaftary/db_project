@@ -1,0 +1,347 @@
+/* auth form */
+.auth-title {
+    position: absolute;
+    top: 40px;
+    left: 420px;
+    width: 600px;
+    height: 270px;
+    background: #391D5E;
+    text-align: center;
+  }
+  
+  .username {
+    position: absolute;
+    top: 350px;
+    left: 420px;
+    width: 240px;
+    height: 100px;
+    background: #D9D9D9;
+    text-align: center;
+    border-color: black;
+    border-style: solid;
+  }
+  
+  .username-text {
+    position: absolute;
+    top: 350px;
+    left: 660px;
+    width: 360px;
+    height: 97px;
+    background: #D9D9D9;
+    text-align: left;
+    border-color: black;
+    border-style: solid;
+    font-size: xx-large;
+  }
+  
+  .password {
+    position: absolute;
+    top: 450px;
+    left: 420px;
+    width: 240px;
+    height: 100px;
+    background: #D9D9D9;
+    text-align: center;
+    border-color: black;
+    border-style: solid;
+  }
+  
+  .password-text {
+    position: absolute;
+    top: 450px;
+    left: 660px;
+    width: 360px;
+    height: 97px;
+    background: #D9D9D9;
+    text-align: left;
+    border-color: black;
+    border-style: solid;
+    font-size: xx-large;
+  }
+
+  .sign-in {
+    position:absolute;
+    top: 600px;
+    left: 420px;
+    width: 200px;
+    height: 90px;
+    background: #391D5E;
+    border-color: #DDC3FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  .create-account {
+    position:absolute;
+    top: 600px;
+    left: 830px;
+    width: 200px;
+    height: 90px;
+    background: #391D5E;
+    border-color: #DDC3FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  /***********/
+  /* nav bar */
+  .nav-bar {
+    padding-bottom: 160px;
+  }
+
+  .home-button {
+    position: absolute;
+    top: 0px;
+    width: 240px;
+    height: 90px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  .criminals-button {
+    position: absolute;
+    top: 0px;
+    left: 240px;
+    width: 240px;
+    height: 90px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  .sentences-button {
+    position: absolute;
+    top: 0px;
+    left: 480px;
+    width: 240px;
+    height: 90px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  .officers-button {
+    position: absolute;
+    top: 0px;
+    left: 720px;
+    width: 240px;
+    height: 90px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  .crimes-button {
+    position: absolute;
+    top: 0px;
+    left: 960px;
+    width: 240px;
+    height: 90px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  .charges-button {
+    position: absolute;
+    top: 0px;
+    left: 1200px;
+    width: 240px;
+    height: 90px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  /************/
+  /* sign out */
+  .sign-out {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 200px;
+    height: 50px;
+    background: #391D5E;
+    border-color: #DDC3FF;
+    border-width: 6px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  /*************/
+  /* home page */
+  .home-title {
+    position: absolute;
+    top: 150px;
+    left: 420px;
+    width: 600px;
+    height: 270px;
+    background: #391D5E;
+    text-align: center;
+  }
+
+  .manage-info {
+    position: absolute;
+    top: 440px;
+    left: 540px;
+    width: 350px;
+    height: 160px;
+    background: #391D5E;
+    border-color: #DDC3FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+  
+  /******************/
+  /* criminals page */
+  .criminals-table {
+    background-color: #383838;
+    color: white;
+    border-color: #414141;
+    width: 100%;
+  }
+  
+  .criminals-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .criminals-table th {
+    background-color: #383838;
+    color: white;
+    border: 1px solid lightgray;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .criminals-table th:not(:first-child),
+  .criminals-table td:not(:first-child) {
+    margin-left: 5px;
+  }
+
+  .prev, .next {
+    background-color: #391D5E;
+    color: white;
+    padding: 5px;
+  }
+
+  .criminals-table span {
+    padding: 10px;
+  }
+
+  /******************/
+  /* manage info page */
+  .manage-button {
+    position: absolute;
+    top: 250px;
+    left: 750px;
+    width: 200px;
+    height: 60px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+
+  .manage1-button {
+    position: absolute;
+    top: 250px;
+    left: 450px;
+    width: 200px;
+    height: 60px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+  .manage2-button {
+    position: absolute;
+    top: 350px;
+    left: 450px;
+    width: 200px;
+    height: 60px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+  .manage3-button {
+    position: absolute;
+    top: 450px;
+    left: 450px;
+    width: 200px;
+    height: 60px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+  .manage4-button {
+    position: absolute;
+    top: 550px;
+    left: 450px;
+    width: 200px;
+    height: 60px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+  .manage5-button {
+    position: absolute;
+    top: 350px;
+    left: 750px;
+    width: 200px;
+    height: 60px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+  .manage6-button {
+    position: absolute;
+    top: 450px;
+    left: 750px;
+    width: 200px;
+    height: 60px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }
+  .manage7-button {
+    position: absolute;
+    top: 550px;
+    left: 750px;
+    width: 200px;
+    height: 60px;
+    background: white;
+    border-color: #9748FF;
+    border-width: 12px;
+    border-style: outset;
+    text-align: center;
+  }

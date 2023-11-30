@@ -2,20 +2,39 @@ import NavBar from "./NavBar";
 import SignOut from "./SignOut";
 import './Style.css';
 import {useState, useEffect} from "react";
+import {StyleSheet} from 'react-native';
 import axios from "axios";
+import {Search} from 'react-feather';
 
 function Criminals() {
     const [data, setData] = useState([]);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(5);
+    const [search, setSearch] = useState("");
 
     /* api call for data */
     useEffect(() => {
-        axios.get("http://localhost:3300/api/criminal-data", data)
-        .then((res) => setData(res.data))
-        .catch(err => { console.error(err); });
-    });
+        const query = {
+            'params': {
+                'search' : search
+            }
+        };
+        if (search) {
+            axios.get("http://localhost:3300/api/search-criminals", query)
+                 .then((res) => setData(res.data))
+                 .catch((err) => { console.error(err); });
+        } else {
+            axios.get("http://localhost:3300/api/criminal-data")
+                 .then((res) => setData(res.data))
+                 .catch((err) => { console.error(err); });
+        }
+    }, [search]);
+
+    /* handling search bar */
+    const handleSearchInput = (e) =>{
+        setSearch(e.target.value);
+    };
 
     /* handling selection of rows */
     const toggleSelection = (index) => {
@@ -37,7 +56,17 @@ function Criminals() {
     return (
         <>
         <NavBar />
-        <table className="criminals-table">
+
+        <div className='search-bar-wrapper'>
+            <input type="text" className="search-bar"
+                style={styles.searchText} placeholder={"Search Criminals"} 
+                value={search} onChange={handleSearchInput}>
+            </input>
+            <div className='search-icon'><Search width="45x" height="45px" className='search-icon-svg' color="#9748FF"/> </div>
+        </div>
+        
+
+        <table className="d-table">
             <thead> 
                 <tr>
                     <th>Select</th>
@@ -83,5 +112,13 @@ function Criminals() {
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    searchText: {
+      color: 383838,
+      fontSize: 30,
+      fontWeight: 'normal',
+    }
+  });
 
 export default Criminals;

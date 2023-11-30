@@ -33,24 +33,25 @@ function AuthForm() {
         }
     }
 
-    const handleCreateAcc = async (e) => {
-        e.preventDefault();
-        
+    const handleCreateAcc = async e =>{
+        e.preventDefault()
         try {
-            const dupResponse = await axios.post("http://localhost:3300/api/checkdup", { username: users.username });
-            const isDuplicate = dupResponse.data.duplicate;
-    
-            if (isDuplicate) {
-                alert("Account already exists. Please try a different username.");
-            } else {
-                await axios.post("http://localhost:3300/api/createacc", users);
-                alert("Account created!");
-                navigate("/cityjail/home");
-            }
+            await axios.post("http://localhost:3300/api/checkdup")
+            .then(res =>{
+                console.log(res.data.duplicate)
+                // if (res.data.duplicate) {
+                //     alert("Try a different username.")
+                //     return;
+                // }
+            })
+
+            // await axios.post("http://localhost:3300/api/createacc", users)
+            //  alert("Account created!")
+            // navigate("/cityjail/home")
         } catch (err) {
-            console.log(err);
+            console.log(err)
         }
-    };
+    }
 
     // useEffect(()=>{
     //     const fetchallUsers = async ()=>{

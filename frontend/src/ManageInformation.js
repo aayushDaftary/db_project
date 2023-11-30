@@ -30,79 +30,65 @@ function ManageInformation() {
     const navChargeInfo = async e => {
         navigate('/cityjail/charge-info')
     }
+
     return (
         <>
         <NavBar />
-        <h1>manage info page</h1>
-        <div className = "manage1-button">
-            <button className = "Page1" onClick={navCriminalInfo}>
-                <Text style = {styles.buttonText}>Criminal Information</Text>
-            </button>
-        </div>
-        <div className = "manage-button">
-            <button className = "Page2" onClick={navAliasInfo}>
-                <Text style = {styles.buttonText}>Alias      Information</Text>
-            </button>
-        </div>
-        <div className = "manage2-button">
-            <button className = "Page2" onClick={navAppealInfo}>
-                <Text style = {styles.buttonText}>Appeal      Information</Text>
-            </button>
-        </div>
-        <div className = "manage3-button">
-            <button className = "Page2" onClick={navSentenceInfo}>
-                <Text style = {styles.buttonText}>Sentence      Information</Text>
-            </button>
-        </div>
-        <div className = "manage4-button">
-            <button className = "Page2" onClick={navOfficerlInfo}>
-                <Text style = {styles.buttonText}>Officer      Information</Text>
-            </button>
-        </div>
-        <div className = "manage5-button">
-            <button className = "Page2" onClick={navProbOfficerInfo}>
-                <Text style = {styles.buttonText}>Probation Officer Information</Text>
-            </button>
-        </div>
-        <div className = "manage6-button">
-            <button className = "Page2" onClick={navCrimeInfo}>
-                <Text style = {styles.buttonText}>Crimes Information</Text>
-            </button>
-        </div>
-        <div className = "manage7-button">
-            <button className = "Page2" onClick={navChargeInfo}>
-                <Text style = {styles.buttonText}>Charges Information</Text>
-            </button>
-        </div>
-       
+        <h1 className="edit-prompt">
+            <Text style = {styles.editText}>Edit:</Text>
+        </h1>
+
+        <button className = "criminal-info-button" onClick={navCriminalInfo}>
+            <Text style = {styles.buttonText}>Criminal Information</Text>
+        </button>
+
+        <button className="alias-info-button" onClick={navAliasInfo}>
+            <Text style = {styles.buttonText}>Alias Information</Text>
+        </button>
+
+        <button className = "appeal-info-button" onClick={navAppealInfo}>
+            <Text style = {styles.buttonText}>Appeal Information</Text>
+        </button>
+
+        <button className = "sentence-info-button" onClick={navSentenceInfo}>
+            <Text style = {styles.buttonText}>Sentence Information</Text>
+        </button>
+
+        <button className = "officer-info-button" onClick={navOfficerlInfo}>
+            <Text style = {styles.buttonText}>Officer Information</Text>
+        </button>
+
+        <button className = "prob-officer-info-button" onClick={navProbOfficerInfo}>
+            <Text style = {styles.buttonText}>Probation Officer Information</Text>
+        </button>
+
+        <button className = "crime-info-button" onClick={navCrimeInfo}>
+            <Text style = {styles.buttonText}>Crimes Information</Text>
+        </button>
+
+        <button className = "charge-info-button" onClick={navChargeInfo}>
+            <Text style = {styles.buttonText}>Charges Information</Text>
+        </button>
+
         <SignOut />
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    titleText: {
-      fontSize: 70,
-      fontWeight: 'bold',
-      color: 'white',
-    },
-    infoText: {
-        fontSize: 50,
-        fontWeight: 'bold',
-        color: 'white',
-      },
-    authText: {
-        fontSize: 35,
+    editText: {
+        fontSize: 40,
         fontWeight: 'normal',
-        color: 'black',
-        top: 30,
-    },
+        color: 'white',
+        top: 5,
+        fontFamily: 'Roboto',
+      },
     buttonText: {
         fontSize: 24,
         fontWeight: 'normal',
-        color: 'purple',
+        color: 'black',
+        fontFamily: 'Roboto',
     },
-  
   });
 
 export default ManageInformation;

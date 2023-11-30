@@ -88,7 +88,7 @@
   /***********/
   /* nav bar */
   .nav-bar {
-    padding-bottom: 160px;
+    padding-bottom: 120px;
   }
 
   .home-button {
@@ -209,21 +209,24 @@
   }
   
   /******************/
-  /* criminals page */
-  .criminals-table {
+  /* tables for display pages */
+  .d-table {
     background-color: #383838;
     color: white;
     border-color: #414141;
     width: 100%;
+    position: relative;
+    top: 100px;
+    
   }
   
-  .criminals-table td {
+  .d-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
   }
   
-  .criminals-table th {
+  .d-table th {
     background-color: #383838;
     color: white;
     border: 1px solid lightgray;
@@ -231,8 +234,8 @@
     text-align: left;
   }
   
-  .criminals-table th:not(:first-child),
-  .criminals-table td:not(:first-child) {
+  .d-table th:not(:first-child),
+  .d-table td:not(:first-child) {
     margin-left: 5px;
   }
 
@@ -242,106 +245,112 @@
     padding: 5px;
   }
 
-  .criminals-table span {
+  .d-table span {
     padding: 10px;
   }
 
-  /******************/
-  /* manage info page */
-  .manage-button {
+  /**************/
+  /* search bar */
+  .search-icon {
     position: absolute;
-    top: 250px;
-    left: 750px;
-    width: 200px;
+    top: 18%;
+    left: 50px;
+  }
+  .search-bar {
+    margin-bottom: 25px;
+    margin-left: 15px;
+    background-color: black;
+    color:#383838;
+    width: 500px;
+    height: 75px;
+    border-radius: 50px;
+    position: absolute;
+    padding-left: 100px;
+  }
+
+  /********************/
+  /* manage info page */
+  .edit-prompt {
+    position: absolute;
+    top: 150px;
+    left: 20%;
+    width: 150px;
     height: 60px;
-    background: white;
-    border-color: #9748FF;
-    border-width: 12px;
-    border-style: outset;
+    background-color: #383838;
+    color: white;
     text-align: center;
   }
 
-  .manage1-button {
+  .alias-info-button {
     position: absolute;
     top: 250px;
-    left: 450px;
-    width: 200px;
+    left: 55%;
+    width: 250px;
     height: 60px;
-    background: white;
-    border-color: #9748FF;
-    border-width: 12px;
-    border-style: outset;
+    background-color: #D9D9D9;
     text-align: center;
   }
-  .manage2-button {
+
+  .criminal-info-button {
+    position: absolute;
+    top: 250px;
+    left: 30%;
+    width: 250px;
+    height: 60px;
+    background-color: #D9D9D9;
+    text-align: center;
+  }
+  .appeal-info-button {
     position: absolute;
     top: 350px;
-    left: 450px;
-    width: 200px;
+    left: 30%;
+    width: 250px;
     height: 60px;
-    background: white;
-    border-color: #9748FF;
-    border-width: 12px;
-    border-style: outset;
+    background-color: #D9D9D9;
     text-align: center;
   }
-  .manage3-button {
+  .sentence-info-button {
     position: absolute;
     top: 450px;
-    left: 450px;
-    width: 200px;
+    left: 30%;
+    width: 250px;
     height: 60px;
-    background: white;
-    border-color: #9748FF;
-    border-width: 12px;
-    border-style: outset;
+    background-color: #D9D9D9;
     text-align: center;
   }
-  .manage4-button {
+  .officer-info-button {
     position: absolute;
     top: 550px;
-    left: 450px;
-    width: 200px;
+    left: 30%;
+    width: 250px;
     height: 60px;
-    background: white;
-    border-color: #9748FF;
-    border-width: 12px;
-    border-style: outset;
+    background-color: #D9D9D9;
     text-align: center;
   }
-  .manage5-button {
+  .prob-officer-info-button {
     position: absolute;
     top: 350px;
-    left: 750px;
-    width: 200px;
+    left: 55%;
+    width: 250px;
     height: 60px;
-    background: white;
-    border-color: #9748FF;
-    border-width: 12px;
-    border-style: outset;
+    background-color: #D9D9D9;
     text-align: center;
   }
-  .manage6-button {
+  .crime-info-button {
     position: absolute;
     top: 450px;
-    left: 750px;
-    width: 200px;
+    left: 55%;
+    width: 250px;
     height: 60px;
-    background: white;
-    border-color: #9748FF;
-    border-width: 12px;
-    border-style: outset;
+    background-color: #D9D9D9;
     text-align: center;
   }
-  .manage7-button {
+  .charge-info-button {
     position: absolute;
     top: 550px;
-    left: 750px;
-    width: 200px;
+    left: 55%;
+    width: 250px;
     height: 60px;
-    background: white;
-    border-color: #9748FF;
-    border-width: 12px;
-    border-style: outset;
+    background-color: #D9D9D9;
     text-align: center;
   }

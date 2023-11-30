@@ -86,11 +86,17 @@ app.get('/api/data', (req, res)=>{
 app.get('/api/getCriminal/:id', (req, res) => {
     const criminalId = req.params.id;
     const q = `SELECT * FROM Criminals WHERE Criminal_ID = ?`;
-    db.query(q, [criminalId], (err, data) => {
-        if (err) return res.json(err);
-        return res.json(data);
+    db.query(q, [criminalId], (err, result) => {
+      if (err) return res.json(err);
+  
+      if (result.length > 0) {
+        const criminal = result[0]; // Assuming the result is an array, and we take the first item
+        return res.json({ success: true, criminal });
+      } else {
+        return res.json({ success: false });
+      }
     });
-});
+  });
 
 app.post('/api/addCriminal', (req, res) => {
     const { name, address, phone } = req.body;

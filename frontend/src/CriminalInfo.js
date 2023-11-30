@@ -8,20 +8,22 @@ import SignOut from './SignOut';
 function CriminalInfo() {
   const navigate = useNavigate();
   const [criminalId, setCriminalId] = useState('');
+  const [criminal, setCriminal] = useState(null);
 
   const handleChange = (e) => {
     setCriminalId(e.target.value);
   };
 
-  const handleDelete = async (e) => {
+  const handleFetchCriminal = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.delete(`http://localhost:3300/api/deleteCriminal/${criminalId}`);
+      const res = await axios.get(`http://localhost:3300/api/getCriminal/${criminalId}`);
 
       if (res.data.success) {
-        alert('Success');
+        setCriminal(res.data.criminal);
       } else {
+        setCriminal(null);
         alert('Criminal does not exist');
       }
     } catch (err) {
@@ -39,9 +41,23 @@ function CriminalInfo() {
         </div>
         <input type="text" name="id" className="id-text" onChange={handleChange} />
 
-        <button type="submit" name="deleteCriminal" className="delete-criminal" onClick={handleDelete}>
-          <Text style={styles.buttonText}>Delete Criminal</Text>
+        <button type="submit" name="fetchCriminal" className="fetch-criminal" onClick={handleFetchCriminal}>
+          <Text style={styles.buttonText}>Fetch Criminal</Text>
         </button>
+
+        {criminal && (
+          <div>
+            <Text style={styles.infoText}>Criminal Info:</Text>
+            <p>FirstName: {criminal.first}</p>
+            <p>LastName: {criminal.last}</p>
+            <p>Street: {criminal.street}</p>
+            <p>City: {criminal.city}</p>
+            <p>State: {criminal.state}</p>
+            <p>Zip: {criminal.zip}</p>
+            <p>Phone: {criminal.phone}</p>
+            
+          </div>
+        )}
       </form>
     </>
   );
@@ -58,6 +74,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'normal',
     color: 'purple',
+  },
+  infoText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'blue',
   },
 });
 

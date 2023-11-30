@@ -48,8 +48,8 @@ function CriminalInfo() {
         {criminal && (
           <div>
             <Text style={styles.infoText}>Criminal Info:</Text>
-            <p>FirstName: {criminal.first}</p>
-            <p>LastName: {criminal.last}</p>
+            <p>First: {criminal.first}</p>
+            <p>Last: {criminal.last}</p>
             <p>Street: {criminal.street}</p>
             <p>City: {criminal.city}</p>
             <p>State: {criminal.state}</p>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: 'normal',
     color: 'black',
-    top: 30,
+    top: 5,
   },
   buttonText: {
     fontSize: 24,

@@ -90,7 +90,15 @@ app.get('/api/getCriminal/:id', (req, res) => {
       if (err) return res.json(err);
   
       if (result.length > 0) {
-        const criminal = result[0]; // Assuming the result is an array, and we take the first item
+        const criminal = {
+            first: result[0].First,
+            last: result[0].Last,
+            street: result[0].Street,
+            city: result[0].City,
+            state: result[0].State,
+            zip: result[0].Zip,
+            phone: result[0].Phone,
+          };
         return res.json({ success: true, criminal });
       } else {
         return res.json({ success: false });

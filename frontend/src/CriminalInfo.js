@@ -9,6 +9,15 @@ function CriminalInfo() {
   const navigate = useNavigate();
   const [criminalId, setCriminalId] = useState('');
   const [criminal, setCriminal] = useState(null);
+  const [editedCriminal, setEditedCriminal] = useState({
+    first: '',
+    last: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
+    phone: '',
+  });
 
   const handleChange = (e) => {
     setCriminalId(e.target.value);
@@ -22,8 +31,18 @@ function CriminalInfo() {
 
       if (res.data.success) {
         setCriminal(res.data.criminal);
+        setEditedCriminal(res.data.criminal);
       } else {
         setCriminal(null);
+        setEditedCriminal({
+          first: '',
+          last: '',
+          street: '',
+          city: '',
+          state: '',
+          zip: '',
+          phone: '',
+        });
         alert('Criminal does not exist');
       }
     } catch (err) {
@@ -31,11 +50,59 @@ function CriminalInfo() {
     }
   };
 
+  const handleEditChange = (e) => {
+    setEditedCriminal({
+      ...editedCriminal,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleConfirm = async () => {
+    try {
+      const res = await axios.put(`http://localhost:3300/api/updateCriminal/${criminalId}`, editedCriminal);
+
+      if (res.data.success) {
+        alert('Update successful');
+      } else {
+        alert('Update failed');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete(`http://localhost:3300/api/deleteCriminal/${criminalId}`);
+
+      if (res.data.success) {
+        alert('Deletion successful');
+        // Reset state after deletion
+        setCriminalId('');
+        setCriminal(null);
+        setEditedCriminal({
+          first: '',
+          last: '',
+          street: '',
+          city: '',
+          state: '',
+          zip: '',
+          phone: '',
+        });
+      } else {
+        alert('Deletion failed');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <>
+
+    <div>
       <NavBar />
       <SignOut />
-      <form>
+      <form style={styles.form}>
         <div className="criminalID">
           <Text style={styles.authText}>Criminal ID:</Text>
         </div>
@@ -46,7 +113,7 @@ function CriminalInfo() {
         </button>
 
         {criminal && (
-          <div>
+          <div style={styles.infoContainer}>
             <Text style={styles.infoText}>Criminal Info:</Text>
             <p>First: {criminal.first}</p>
             <p>Last: {criminal.last}</p>
@@ -55,20 +122,96 @@ function CriminalInfo() {
             <p>State: {criminal.state}</p>
             <p>Zip: {criminal.zip}</p>
             <p>Phone: {criminal.phone}</p>
-            
+          </div>
+        )}
+        {criminal && (
+          <div style={styles.editContainer}>
+            <Text style={styles.infoText}>Edit Criminal Info:</Text>
+            <div>
+              <label>
+                First Name:
+                <input type="text" name="first" value={editedCriminal.first} onChange={handleEditChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Last Name:
+                <input type="text" name="last" value={editedCriminal.last} onChange={handleEditChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Street:
+                <input type="text" name="street" value={editedCriminal.street} onChange={handleEditChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                City:
+                <input type="text" name="city" value={editedCriminal.city} onChange={handleEditChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                State:
+                <input type="text" name="state" value={editedCriminal.state} onChange={handleEditChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Zip:
+                <input type="text" name="zip" value={editedCriminal.zip} onChange={handleEditChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Phone:
+                <input type="text" name="phone" value={editedCriminal.phone} onChange={handleEditChange} />
+              </label>
+            </div>
+            <div>
+              <button type="button" onClick={handleConfirm}>
+                <Text style={styles.buttonText}>Confirm</Text>
+              </button>
+            </div>
+            <div>
+              <button type="button" onClick={handleDelete}>
+                <Text style={styles.buttonText}>Delete Criminal</Text>
+              </button>
+            </div>
           </div>
         )}
       </form>
-    </>
+    </div>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  infoContainer: {
+    textAlign: 'center',
+  },
+  editContainer: {
+    textAlign: 'center',
+  },
   authText: {
     fontSize: 35,
     fontWeight: 'normal',
     color: 'black',
-    top: 5,
+    marginBottom: 10,
   },
   buttonText: {
     fontSize: 24,
@@ -79,6 +222,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: 'blue',
+    marginTop: 20,
   },
 });
 

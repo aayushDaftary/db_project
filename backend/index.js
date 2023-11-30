@@ -106,6 +106,24 @@ app.get('/api/getCriminal/:id', (req, res) => {
     });
   });
 
+  app.put('/api/updateCriminal/:id', (req, res) => {
+    const criminalId = req.params.id;
+    const updatedCriminal = req.body; 
+    const q = `UPDATE Criminals SET ? WHERE Criminal_ID = ?`;
+  
+    db.query(q, [updatedCriminal, criminalId], (err, result) => {
+      if (err) {
+        console.error('Error updating criminal information:', err);
+        return res.json({ success: false });
+      }
+  
+      return res.json({ success: true });
+    });
+  });
+
+
+
+  
 app.post('/api/addCriminal', (req, res) => {
     const { name, address, phone } = req.body;
     const q = `INSERT INTO Criminals (First, Last, Street, City, State, Zip, Phone) VALUES (?, ?, ?, ?, ?, ?, ?)`;

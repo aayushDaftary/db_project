@@ -69,7 +69,7 @@ app.get('/api/criminal-data', (req, res)=>{
     }); 
 })
 
-/* criminal search endpoint */
+/* api call for searching criminal data */
 app.get('/api/search-criminals', (req, res)=>{
     const {search} = req.query;
     const q = `SELECT Criminal_ID, 
@@ -98,6 +98,23 @@ app.get('/api/sentence-data', (req, res)=>{
         if (err) return res.json(err);
         return res.json(data);
     }); 
+})
+
+/* api call for searching criminals table */
+app.get('/api/search-sentences', (req, res)=>{
+  const {search} = req.query;
+  const q = `SELECT Sentence_ID, 
+             Criminal_ID,
+             Type, 
+             Prob_ID,
+             Start_date,
+             End_date 
+             FROM Sentences
+             WHERE Sentence_ID LIKE "%${search}%";`
+  db.query(q, {search}, (err, data)=>{
+      if (err) return res.json(err);
+      return res.json(data);
+  }); 
 })
 
 /* api call for retrieving officers table data */

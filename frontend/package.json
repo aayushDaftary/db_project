@@ -10,6 +10,7 @@
     "react": "^18.2.0",
     "react-data-table-component": "^7.5.4",
     "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10",
     "react-native": "^0.72.7",
     "react-native-web": "^0.19.9",
     "react-router-dom": "^6.19.0",

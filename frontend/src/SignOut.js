@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function SignOut() {
     const navigate = useNavigate()
     const navAuth = async e =>{
-        navigate('/cityjail')
+        navigate('/')
     }
     return (
         <button className='sign-out' onClick={navAuth}>

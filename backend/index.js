@@ -123,7 +123,7 @@ app.get('/api/getCriminal/:id', (req, res) => {
 
 
 
-  
+
 app.post('/api/addCriminal', (req, res) => {
     const { name, address, phone } = req.body;
     const q = `INSERT INTO Criminals (First, Last, Street, City, State, Zip, Phone) VALUES (?, ?, ?, ?, ?, ?, ?)`;
@@ -151,6 +151,71 @@ app.delete('/api/deleteCriminal/:id', (req, res) => {
     db.query(q, [criminalId], (err, result) => {
         if (err) return res.json(err);
         return res.json({ success: true, affectedRows: result.affectedRows });
+    });
+});
+
+
+app.get('/api/getAliases/:id', (req, res) => {
+    const criminalId = req.params.id;
+    const q = `SELECT * FROM Aliases WHERE Criminal_ID = ?`;
+    db.query(q, [criminalId], (err, result) => {
+      if (err) return res.json(err);
+  
+      if (result.length > 0) {
+        const aliases = result.map((row) => ({
+          aliasID: row.Alias_ID,
+          alias: row.Alias,
+        }));
+        return res.json({ success: true, aliases });
+      } else {
+        return res.json({ success: false });
+      }
+    });
+  });
+  
+  app.put('/api/updateAlias/:id', (req, res) => {
+    const criminalId = req.params.id;
+    const { aliasID, updatedAlias } = req.body;
+  
+    const q = `UPDATE Aliases SET Alias = ? WHERE Criminal_ID = ? AND Alias_ID = ?`;
+    db.query(q, [updatedAlias, criminalId, aliasID], (err, result) => {
+      if (err) return res.json(err);
+  
+      if (result.affectedRows > 0) {
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
+    });
+  });
+  
+  app.delete('/api/deleteAlias/:criminalId/:aliasId', (req, res) => {
+    const { criminalId, aliasId } = req.params;
+  
+    const q = `DELETE FROM Aliases WHERE Criminal_ID = ? AND Alias_ID = ?`;
+    db.query(q, [criminalId, aliasId], (err, result) => {
+      if (err) return res.json(err);
+  
+      if (result.affectedRows > 0) {
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
+    });
+});
+
+app.post('/api/addAlias', (req, res) => {
+    const { criminalId, alias } = req.body;
+    const q = `INSERT INTO Aliases (Criminal_ID, Alias) VALUES (?, ?)`;
+    const values = [criminalId, alias];
+
+    db.query(q, values, (err, result) => {
+        if (err) {
+            console.error('Error adding alias:', err);
+            return res.json({ success: false });
+        }
+
+        return res.json({ success: true, insertedId: result.insertId });
     });
 });
 

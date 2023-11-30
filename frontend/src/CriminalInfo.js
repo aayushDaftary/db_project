@@ -77,7 +77,6 @@ function CriminalInfo() {
 
       if (res.data.success) {
         alert('Deletion successful');
-        // Reset state after deletion
         setCriminalId('');
         setCriminal(null);
         setEditedCriminal({
@@ -199,19 +198,22 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 5,
   },
   infoContainer: {
     textAlign: 'center',
+    marginTop: 1,
   },
   editContainer: {
     textAlign: 'center',
+    marginTop: 1,
   },
   authText: {
     fontSize: 35,
     fontWeight: 'normal',
     color: 'black',
     marginBottom: 10,
+    
   },
   buttonText: {
     fontSize: 24,

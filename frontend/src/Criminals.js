@@ -2,7 +2,7 @@ import NavBar from "./NavBar";
 import SignOut from "./SignOut";
 import './Style.css';
 import {useState, useEffect} from "react";
-import {Text, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import axios from "axios";
 import {Search} from 'react-feather';
 
@@ -20,7 +20,6 @@ function Criminals() {
                 'search' : search
             }
         };
-        console.log(query);
         if (search) {
             axios.get("http://localhost:3300/api/search-criminals", query)
                  .then((res) => setData(res.data))

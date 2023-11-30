@@ -69,7 +69,7 @@ app.get('/api/criminal-data', (req, res)=>{
     }); 
 })
 
-/* criminal search endpoint */
+/* api call for searching criminal data */
 app.get('/api/search-criminals', (req, res)=>{
     const {search} = req.query;
     const q = `SELECT Criminal_ID, 
@@ -100,19 +100,57 @@ app.get('/api/sentence-data', (req, res)=>{
     }); 
 })
 
-/* api call for retrieving officers table data */
+/* api call for searching criminals table */
+app.get('/api/search-sentences', (req, res)=>{
+  const {search} = req.query;
+  const q = `SELECT Sentence_ID, 
+             Criminal_ID,
+             Type, 
+             Prob_ID,
+             Start_date,
+             End_date 
+             FROM Sentences
+             WHERE Sentence_ID LIKE "%${search}%";`
+  db.query(q, {search}, (err, data)=>{
+      if (err) return res.json(err);
+      return res.json(data);
+  }); 
+})
+
+/* api call for searching officers table */
 app.get('/api/officer-data', (req, res)=>{
-    const {ID, Name, Precinct, Badge, Phone, Status} = req.body;
-    const q = `SELECT Officer_ID, 
-               CONCAT(First, ' ', Last) AS Name,
-               Precinct, 
-               Badge,
-               Phone,
-               Status FROM Officers;`
-    db.query(q, {ID, Name, Precinct, Badge, Phone, Status}, (err, data)=>{
-        if (err) return res.json(err);
-        return res.json(data);
-    }); 
+  const {ID, Name, Precinct, Badge, Phone, Status} = req.body;
+  const q = `SELECT Officer_ID, 
+             CONCAT(First, ' ', Last) AS Name,
+             Precinct, 
+             Badge,
+             Phone,
+             Status 
+             FROM Officers;`
+  db.query(q, {ID, Name, Precinct, Badge, Phone, Status}, (err, data)=>{
+      if (err) return res.json(err);
+      return res.json(data);
+  }); 
+})
+
+/* api call for retrieving officers table data */
+app.get('/api/search-officers', (req, res)=>{
+  const {search} = req.query;
+  const q = `SELECT Officer_ID, 
+             CONCAT(First, ' ', Last) AS Name,
+             Precinct, 
+             Badge,
+             Phone,
+             Status 
+             FROM Officers
+             WHERE Officer_ID LIKE "%${search}%" 
+             OR CONCAT(First, ' ', Last) LIKE "%${search}%"
+             OR Precinct LIKE "%${search}%"
+             OR Badge LIKE "%${search}%";`
+  db.query(q, {search}, (err, data)=>{
+      if (err) return res.json(err);
+      return res.json(data);
+  }); 
 })
 
 /* api call for retrieving crimes table data */
@@ -131,6 +169,24 @@ app.get('/api/crime-data', (req, res)=>{
     }); 
 })
 
+/* api call for searching crimes table */
+app.get('/api/search-crimes', (req, res)=>{
+  const {search} = req.query;
+  const q = `SELECT Crime_ID, 
+             Criminal_ID,
+             Classification, 
+             Status,
+             Date_charged,
+             Hearing_date,
+             Appeal_cut_date 
+             FROM Crimes
+             WHERE Crime_ID LIKE "%${search}%";`
+  db.query(q, {search}, (err, data)=>{
+      if (err) return res.json(err);
+      return res.json(data);
+  }); 
+})
+
 /* api call for retrieving charges table data */
 app.get('/api/charge-data', (req, res)=>{
     const {ID, Crime, Code, Status, Fine, Fee, Paid, Due} = req.body;
@@ -146,6 +202,25 @@ app.get('/api/charge-data', (req, res)=>{
         if (err) return res.json(err);
         return res.json(data);
     }); 
+})
+
+/* api call for searching charges table */
+app.get('/api/search-charges', (req, res)=>{
+  const {search} = req.query;
+  const q = `SELECT Charge_ID, 
+             Crime_ID,
+             Crime_code, 
+             Charge_status,
+             Fine_amount,
+             Court_fee,
+             Amount_paid,
+             Pay_due_date 
+             FROM Crime_charges
+             WHERE Charge_ID LIKE "%${search}%";`
+  db.query(q, {search}, (err, data)=>{
+      if (err) return res.json(err);
+      return res.json(data);
+  }); 
 })
 
 app.get('/api/getCriminal/:id', (req, res) => {

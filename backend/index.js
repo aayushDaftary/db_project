@@ -392,3 +392,74 @@ app.post('/cityjail', (req,res)=>{
     });
 })
 */
+
+app.get('/api/getAppeal/:id', (req, res) => {
+  console.log('Received get request', req.params.id);  // Add this line
+
+  const appealId = req.params.id;
+  const q = `SELECT * FROM Appeals WHERE Appeal_ID = ?`;
+  db.query(q, [appealId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.length > 0) {
+      const appeal = {
+        crimeId: result[0].Crime_ID,
+        filingDate: result[0].Filing_date,
+        hearingDate: result[0].Hearing_date,
+        status: result[0].Status,
+      };
+      return res.json({ success: true, appeal });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.put('/api/updateAppeal/:id', (req, res) => {
+  const appealId = req.params.id;
+  const { crimeId, filingDate, hearingDate, status } = req.body;
+
+  const q = `UPDATE Appeals SET Crime_ID = ?, Filing_Date = ?, Hearing_Date = ?, Status = ? WHERE Appeal_ID = ?`;
+  db.query(q, [crimeId, filingDate, hearingDate, status, appealId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.affectedRows > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.delete('/api/deleteAppeal/:id', (req, res) => {
+  const appealId = req.params.id;
+
+  const q = `DELETE FROM Appeals WHERE Appeal_ID = ?`;
+  db.query(q, [appealId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.affectedRows > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.post('/api/addAppeal', (req, res) => {
+  
+  
+  const { crimeId, filingDate, hearingDate, status } = req.body;
+  
+  const q = `INSERT INTO Appeals (Crime_ID, Filing_Date, Hearing_Date, Status) VALUES (?, ?, ?, ?)`;
+  const values = [crimeId, filingDate, hearingDate, status];
+
+  db.query(q, values, (err, result) => {
+      if (err) {
+          console.error('Error adding appeal:', err);
+          return res.json({ success: false });
+      }
+
+      return res.json({ success: true, insertedId: result.insertId });
+  });
+});

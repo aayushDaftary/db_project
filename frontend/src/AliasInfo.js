@@ -16,6 +16,12 @@ function AliasInfo() {
     alias: '',
   });
 
+  const handleNewChange = (e) => {
+    setNewAlias((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleChange = (e) => {
     setCriminalId(e.target.value);
@@ -88,8 +94,27 @@ function AliasInfo() {
     }
   };
 
+  const handleAdd = async e => {
+    //e.preventDefault();
+    try{
+      const res = await axios.post(`http://localhost:3300/api/addAlias`, newAlias);
+      if(res.data.success){
+        alert('Successfully added');
+      }
+      else{
+        alert('Unsuccessful')
+      }
+    }
+    catch(err)
+    {
+      console.log(err);
+    }
+
+  };
+
   return (
     <div>
+      
       <NavBar />
       <SignOut />
       <form style={styles.form}>
@@ -135,6 +160,22 @@ function AliasInfo() {
           </div>
         )}
       </form>
+      <form>
+        <div className="criminal_id">
+                <Text style={styles.authText}>Criminal ID:</Text>
+            </div>
+            <input type="id" name ="criminalId" className="crim-id-text" onChange={handleNewChange}/>
+
+            <div className="alias_name"> 
+                <Text style={styles.authText}>Alias:</Text>
+            </div>
+            <input type="Alias" name ="alias" className="alias-text" onChange={handleNewChange}/>
+
+            <button type="submit" name="add" className="add-person" onClick={handleAdd}>
+                <Text style={styles.buttonText}>Add Alias</Text>
+            </button>
+
+      </form> 
     </div>
   );
 }

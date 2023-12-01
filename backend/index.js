@@ -11,7 +11,7 @@ app.use(cors())
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"pass",
+    password:"password",
     database:"cityjail",
     port: '3306'
 })
@@ -343,6 +343,7 @@ app.get('/api/getAliases/:id', (req, res) => {
 
 app.post('/api/addAlias', (req, res) => {
     const { criminalId, alias } = req.body;
+    
     const q = `INSERT INTO Aliases (Criminal_ID, Alias) VALUES (?, ?)`;
     const values = [criminalId, alias];
 

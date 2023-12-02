@@ -463,3 +463,58 @@ app.post('/api/addAppeal', (req, res) => {
       return res.json({ success: true, insertedId: result.insertId });
   });
 });
+
+app.get('/api/getProbOfficer/:id', (req, res) => {
+  const probId = req.params.id;
+  const q = `SELECT * FROM Prob_officers WHERE Prob_ID = ?`;
+  db.query(q, [probId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.length > 0) {
+      const probOfficer = {
+        Last: result[0].Last,
+        First: result[0].First,
+        Street: result[0].Street,
+        City: result[0].City,
+        State: result[0].State,
+        Zip: result[0].Zip,
+        Phone: result[0].Phone,
+        Email: result[0].Email,
+        Status: result[0].Status,
+      };
+      return res.json({ success: true, probOfficer });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+// Update a probation officer by ID
+app.put('/api/updateProbOfficer/:id', (req, res) => {
+  const probId = req.params.id;
+  const { Last, First, Street, City, State, Zip, Phone, Email, Status } = req.body;
+  const q = `UPDATE Prob_officers SET Last = ?, First = ?, Street = ?, City = ?, State = ?, Zip = ?, Phone = ?, Email = ?, Status = ? WHERE Prob_ID = ?`;
+  db.query(q, [Last, First, Street, City, State, Zip, Phone, Email, Status, probId], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({ success: true });
+  });
+});
+
+// Delete a probation officer by ID
+app.delete('/api/deleteProbOfficer/:id', (req, res) => {
+  const probId = req.params.id;
+  const q = `DELETE FROM Prob_officers WHERE Prob_ID = ?`;
+  db.query(q, [probId], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({ success: true });
+  });
+});
+
+app.post('/api/addProbOfficer', (req, res) => {
+  const { Last, First, Street, City, State, Zip, Phone, Email, Status } = req.body;
+  const q = `INSERT INTO Prob_officers (Last, First, Street, City, State, Zip, Phone, Email, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  db.query(q, [Last, First, Street, City, State, Zip, Phone, Email, Status], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({ success: true, insertedId: result.insertId });
+  });
+});

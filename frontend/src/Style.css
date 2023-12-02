@@ -183,6 +183,21 @@
     text-align: center;
   }
 
+  /***************/
+  /* manage info */
+  .manage-info-button {
+    position: absolute;
+    bottom: 50px;
+    right: 0px;
+    width: 200px;
+    height: 115px;
+    background: #391D5E;
+    border-color: #DDC3FF;
+    border-width: 6px;
+    border-style: outset;
+    text-align: center;
+  }
+
   /*************/
   /* home page */
   .home-title {

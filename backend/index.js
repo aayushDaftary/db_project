@@ -11,7 +11,7 @@ app.use(cors())
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"password",
+    password:"pass",
     database:"cityjail",
     port: '3306'
 })
@@ -261,10 +261,10 @@ app.get('/api/getCriminal/:id', (req, res) => {
     });
   });
   
-app.post('/api/addCriminal', (req, res) => {
-    const { name, address, phone } = req.body;
-    const q = `INSERT INTO Criminals (First, Last, Street, City, State, Zip, Phone) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    const values = [name.first, name.last, address.street, address.city, address.state, address.zip, phone];
+app.post('/api/insertCriminals', (req, res) => {
+    const { first, last, street, city, state, zip, phone } = req.body;
+    const q = `INSERT INTO Criminals (First, Last, Street, City, State, Zip, Phone) VALUES (?, ?, ?, ?, ?, ?, ?);`
+    const values = [first, last, street, city, state, zip, phone];
     db.query(q, values, (err, result) => {
         if (err) return res.json(err);
         return res.json({ success: true, insertedId: result.insertId });
@@ -310,22 +310,19 @@ app.get('/api/getAliases/:id', (req, res) => {
     });
   });
   
-  app.put('/api/updateAlias/:id', (req, res) => {
-    const criminalId = req.params.id;
-    const { aliasID, updatedAlias } = req.body;
-  
-    const q = `UPDATE Aliases SET Alias = ? WHERE Criminal_ID = ? AND Alias_ID = ?`;
-    db.query(q, [updatedAlias, criminalId, aliasID], (err, result) => {
-      if (err) return res.json(err);
-  
-      if (result.affectedRows > 0) {
-        return res.json({ success: true });
-      } else {
-        return res.json({ success: false });
-      }
+  app.put('/api/editCharge/:id', (req, res) => {
+    const chargeID = req.params.id;
+    const { crimeID, crimeCode, status, fine, fee, paid, due } = req.body;
+    const q = `UPDATE Crime_charges 
+              SET Crime_ID = ?, Crime_code = ?, Charge_status = ?, Fine_amount = ?, 
+              Court_fee = ?, Amount_paid = ?, Pay_due_date = ? WHERE Charge_ID = ?;`
+    const values = [crimeID, crimeCode, status, fine, fee, paid, due, chargeID];
+    db.query(q, values, (err, result) => {
+        if (err) return res.json(err);
+        return res.json({ success: true, affectedRows: result.affectedRows });
     });
-  });
-  
+});
+  /*
   app.delete('/api/deleteAlias/:criminalId/:aliasId', (req, res) => {
     const { criminalId, aliasId } = req.params;
   
@@ -340,6 +337,7 @@ app.get('/api/getAliases/:id', (req, res) => {
       }
     });
 });
+*/
 
 app.post('/api/addAlias', (req, res) => {
     const { criminalId, alias } = req.body;
@@ -355,6 +353,42 @@ app.post('/api/addAlias', (req, res) => {
 
         return res.json({ success: true, insertedId: result.insertId });
     });
+});
+
+app.get('/api/getCharge/:id', (req, res) => {
+  const chargeID = req.params.id;
+  const q = `SELECT * FROM Crime_charges WHERE Charge_ID = ?`;
+  db.query(q, [chargeID], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.length > 0) {
+      const charge = {
+          crime_id: result[0].Crime_ID,
+          crime_code: result[0].Crime_code,
+          status: result[0].Charge_status,
+          fine: result[0].Fine_amount,
+          fee: result[0].Court_fee,
+          paid: result[0].Amount_paid,
+          due: result[0].Pay_due_date,
+        };
+      return res.json({ success: true, charge });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.put('/api/updateCharge/:id', (req, res) => {
+  const chargeID = req.params.id;
+  const updatedCharge = req.body; 
+  const q = `UPDATE Crime_charges SET ? WHERE Charge_ID = ?`;
+  db.query(q, [updatedCharge, chargeID], (err, result) => {
+    if (err) {
+      console.error('Error updating charge information:', err);
+      return res.json({ success: false });
+    }
+    return res.json({ success: true });
+  });
 });
 
 app.listen(3300, ()=>{

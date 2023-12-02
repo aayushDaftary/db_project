@@ -134,137 +134,137 @@ function CriminalInfo() {
 
     <div>
       <NavBar />
-      
+
       <form className='criminal-info-form'>
-        <div style={styles.container}> 
-          <Text style={styles.authText}>Criminal ID:</Text>
-          <input type="text" name="id" className="id-text" onChange={handleChange} />
-          <button type="submit" name="fetchCriminal" className="fetch-criminal" onClick={handleFetchCriminal}>
-            <Text style={styles.buttonText}>Fetch Criminal</Text>
-          </button>
+        <div className='info-container'>
+          <div className='info-label'>View/Change Criminal Information</div>
+          <div className='id-label'>Criminal ID:</div>
+          <input type="text" name="id" className="id-input" placeholder={"Enter ID Here"} onChange={handleChange} />
+          <button type="submit" name="fetchCriminal" className="info-button" onClick={handleFetchCriminal}>Enter</button>
         </div>
+        
        
         {criminal && (
-          <div style={styles.infoContainer}>
-            <Text style={styles.infoText}>Criminal Info:</Text>
-            <p>First: {criminal.first}</p>
-            <p>Last: {criminal.last}</p>
-            <p>Street: {criminal.street}</p>
-            <p>City: {criminal.city}</p>
-            <p>State: {criminal.state}</p>
-            <p>Zip: {criminal.zip}</p>
-            <p>Phone: {criminal.phone}</p>
-          </div>
+            <div className='attr-container'>
+              <p className='attr'>First Name: {criminal.first}</p>
+              <p className='attr'>Last: {criminal.last}</p>
+              <p className='attr'>Street: {criminal.street}</p>
+              <p className='attr'>City: {criminal.city}</p>
+              <p className='attr'>State: {criminal.state}</p>
+              <p className='attr'>Zip: {criminal.zip}</p>
+              <p className='attr'>Phone: {criminal.phone}</p>
+            </div>
         )}
+
         {criminal && (
-          <div style={styles.editContainer}>
-            <Text style={styles.infoText}>Edit Criminal Info:</Text>
-            <div>
-              <label>
-                First Name:
-                <input type="text" name="first" value={editedCriminal.first} onChange={handleEditChange} />
-              </label>
+          <div>
+          <button type="button" className='confirmation-button' onClick={handleDelete}>Delete Criminal</button>
+          <div className='edit-container'>
+            <div className='edit-label'>Edit Criminal Info</div>
+          </div>
+            <div className='attr-container'>
+                  <div className='attr'>
+                    <label>
+                      First Name:
+                      <input type="text" name="first" value={editedCriminal.first} onChange={handleEditChange} />
+                    </label>
+                  </div>
+                  <div className='attr'>
+                    <label>
+                      Last Name:
+                      <input type="text" name="last" value={editedCriminal.last} onChange={handleEditChange} />
+                    </label>
+                  </div>
+                  <div className='attr'>
+                    <label>
+                      Street:
+                      <input type="text" name="street" value={editedCriminal.street} onChange={handleEditChange} />
+                    </label>
+                  </div>
+                  <div className='attr'>
+                    <label>
+                      City:
+                      <input type="text" name="city" value={editedCriminal.city} onChange={handleEditChange} />
+                    </label>
+                  </div>
+                  <div className='attr'>
+                    <label>
+                      State:
+                      <input type="text" name="state" value={editedCriminal.state} onChange={handleEditChange} />
+                    </label>
+                  </div>
+                  <div className='attr'>
+                    <label>
+                      Zip:
+                      <input type="text" name="zip" value={editedCriminal.zip} onChange={handleEditChange} />
+                    </label>
+                  </div>
+                  <div className='attr'>
+                    <label>
+                      Phone:
+                      <input type="text" name="phone" value={editedCriminal.phone} onChange={handleEditChange} />
+                    </label>
+                  </div>
+                  <button type="button" className='confirmation-button' onClick={handleConfirm}>Confirm</button>
             </div>
-            <div>
-              <label>
-                Last Name:
-                <input type="text" name="last" value={editedCriminal.last} onChange={handleEditChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Street:
-                <input type="text" name="street" value={editedCriminal.street} onChange={handleEditChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                City:
-                <input type="text" name="city" value={editedCriminal.city} onChange={handleEditChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                State:
-                <input type="text" name="state" value={editedCriminal.state} onChange={handleEditChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Zip:
-                <input type="text" name="zip" value={editedCriminal.zip} onChange={handleEditChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Phone:
-                <input type="text" name="phone" value={editedCriminal.phone} onChange={handleEditChange} />
-              </label>
-            </div>
-            <div>
-              <button type="button" onClick={handleConfirm}>
-                <Text style={styles.buttonText}>Confirm</Text>
-              </button>
-            </div>
-            <div>
-              <button type="button" onClick={handleDelete}>
-                <Text style={styles.buttonText}>Delete Criminal</Text>
-              </button>
-            </div>
+            
+
+              
+
           </div>
         )}
       </form>
 
       <form name='criminal-insert-form'>
-      <div style={styles.editContainer}>
-            <Text style={styles.infoText}>Add New Criminal Info:</Text>
-            <div>
-              <label>
-                First Name:
-                <input type="text" name="first" value={newCriminal.first} onChange={handleInsertChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Last Name:
-                <input type="text" name="last" value={newCriminal.last} onChange={handleInsertChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Street:
-                <input type="text" name="street" value={newCriminal.street} onChange={handleInsertChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                City:
-                <input type="text" name="city" value={newCriminal.city} onChange={handleInsertChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                State:
-                <input type="text" name="state" value={newCriminal.state} onChange={handleInsertChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Zip:
-                <input type="text" name="zip" value={newCriminal.zip} onChange={handleInsertChange} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Phone:
-                <input type="text" name="phone" value={newCriminal.phone} onChange={handleInsertChange} />
-              </label>
-            </div>
-            <div>
-              <button type="button" onClick={handleInsert}>
-                <Text style={styles.buttonText}>Add New Criminal</Text>
-              </button>
-            </div>
+      <div className='new-container'>
+            <div className='new-label'>Add New Criminal Info:</div>
+      </div>
+            <div className='attr-container'>
+              <div className='attr'>
+                <label>
+                  First Name:
+                  <input type="text" name="first" value={newCriminal.first} onChange={handleInsertChange} />
+                </label>
+              </div>
+              <div className='attr'>
+                <label>
+                  Last Name:
+                  <input type="text" name="last" value={newCriminal.last} onChange={handleInsertChange} />
+                </label>
+              </div>
+              <div className='attr'>
+                <label>
+                  Street:
+                  <input type="text" name="street" value={newCriminal.street} onChange={handleInsertChange} />
+                </label>
+              </div>
+              <div className='attr'>
+                <label>
+                  City:
+                  <input type="text" name="city" value={newCriminal.city} onChange={handleInsertChange} />
+                </label>
+              </div>
+              <div className='attr'>
+                <label>
+                  State:
+                  <input type="text" name="state" value={newCriminal.state} onChange={handleInsertChange} />
+                </label>
+              </div>
+              <div className='attr'>
+                <label>
+                  Zip:
+                  <input type="text" name="zip" value={newCriminal.zip} onChange={handleInsertChange} />
+                </label>
+              </div>
+              <div className='attr'>
+                <label>
+                  Phone:
+                  <input type="text" name="phone" value={newCriminal.phone} onChange={handleInsertChange} />
+                </label>
+              </div>
+              <div>
+                <button className='confirmation-button' type="button" onClick={handleInsert}>Add</button>
+              </div>            
         </div>
       </form>
 

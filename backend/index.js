@@ -394,7 +394,6 @@ app.post('/cityjail', (req,res)=>{
 */
 
 app.get('/api/getAppeal/:id', (req, res) => {
-  console.log('Received get request', req.params.id);  // Add this line
 
   const appealId = req.params.id;
   const q = `SELECT * FROM Appeals WHERE Appeal_ID = ?`;
@@ -701,6 +700,76 @@ app.post('/api/addCrime', (req, res) => {
   db.query(q, values, (err, result) => {
       if (err) {
           console.error('Error adding crime:', err);
+          return res.json({ success: false });
+      }
+
+      return res.json({ success: true, insertedId: result.insertId });
+  });
+});
+
+app.get('/api/getCharge/:id', (req, res) => {
+  const chargeId = req.params.id;
+  const q = `SELECT * FROM Crime_charges WHERE Charge_ID = ?`;
+  db.query(q, [chargeId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.length > 0) {
+      const charge = {
+        crimeId: result[0].Crime_ID,
+        crimeCode: result[0].Crime_code,
+        chargeStatus: result[0].Charge_status,
+        fineAmount: result[0].Fine_amount,
+        courtFee: result[0].Court_fee,
+        amountPaid: result[0].Amount_paid,
+        payDueDate: result[0].Pay_due_date,
+      };
+      return res.json({ success: true, charge });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.put('/api/updateCharge/:id', (req, res) => {
+  const chargeId = req.params.id;
+  const { crimeId, crimeCode, chargeStatus, fineAmount, courtFee, amountPaid, payDueDate } = req.body;
+
+  const q = `UPDATE Crime_charges SET Crime_ID = ?, Crime_code = ?, Charge_status = ?, Fine_amount = ?, Court_fee = ?, Amount_paid = ?, Pay_due_date = ? WHERE Charge_ID = ?`;
+  db.query(q, [crimeId, crimeCode, chargeStatus, fineAmount, courtFee, amountPaid, payDueDate, chargeId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.affectedRows > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.delete('/api/deleteCharge/:id', (req, res) => {
+  const chargeId = req.params.id;
+
+  const q = `DELETE FROM Crime_charges WHERE Charge_ID = ?`;
+  db.query(q, [chargeId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.affectedRows > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.post('/api/addCharge', (req, res) => {
+  const { crimeId, crimeCode, chargeStatus, fineAmount, courtFee, amountPaid, payDueDate } = req.body;
+  
+  const q = `INSERT INTO Crime_charges (Crime_ID, Crime_code, Charge_status, Fine_amount, Court_fee, Amount_paid, Pay_due_date) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const values = [crimeId, crimeCode, chargeStatus, fineAmount, courtFee, amountPaid, payDueDate];
+
+  db.query(q, values, (err, result) => {
+      if (err) {
+          console.error('Error adding charge:', err);
           return res.json({ success: false });
       }
 

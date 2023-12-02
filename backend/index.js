@@ -568,3 +568,142 @@ app.post('/api/addOfficer', (req, res) => {
     return res.json({ success: true });
   });
 });
+
+
+app.get('/api/getSentence/:id', (req, res) => {
+  const sentenceId = req.params.id;
+  const q = `SELECT * FROM Sentences WHERE Sentence_ID = ?`;
+  db.query(q, [sentenceId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.length > 0) {
+      const sentence = {
+        Criminal_ID: result[0].Criminal_ID,
+        Type: result[0].Type,
+        Prob_ID: result[0].Prob_ID,
+        Start_date: result[0].Start_date,
+        End_date: result[0].End_date,
+      };
+      return res.json({ success: true, sentence });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+
+app.put('/api/updateSentence/:id', (req, res) => {
+  const sentenceId = req.params.id;
+  const { Criminal_ID, Type, Prob_ID, Start_date, End_date } = req.body;
+
+  const q = `UPDATE Sentences SET Criminal_ID = ?, Type = ?, Prob_ID = ?, Start_date = ?, End_date = ? WHERE Sentence_ID = ?`;
+  db.query(q, [Criminal_ID, Type, Prob_ID, Start_date, End_date, sentenceId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.affectedRows > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.delete('/api/deleteSentence/:id', (req, res) => {
+  const sentenceId = req.params.id;
+
+  const q = `DELETE FROM Sentences WHERE Sentence_ID = ?`;
+  db.query(q, [sentenceId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.affectedRows > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.post('/api/addSentence', (req, res) => {
+  const { Criminal_ID, Type, Prob_ID, Start_date, End_date } = req.body;
+  
+  const q = `INSERT INTO Sentences (Criminal_ID, Type, Prob_ID, Start_date, End_date) VALUES (?, ?, ?, ?, ?)`;
+  const values = [Criminal_ID, Type, Prob_ID, Start_date, End_date];
+
+  db.query(q, values, (err, result) => {
+      if (err) {
+          console.error('Error adding sentence:', err);
+          return res.json({ success: false });
+      }
+
+      return res.json({ success: true, insertedId: result.insertId });
+  });
+});
+
+app.get('/api/getCrime/:id', (req, res) => {
+  const crimeId = req.params.id;
+  const q = `SELECT * FROM Crimes WHERE Crime_ID = ?`;
+  db.query(q, [crimeId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.length > 0) {
+      const crime = {
+        Criminal_ID: result[0].Criminal_ID,
+        Classification: result[0].Classification,
+        Date_charged: result[0].Date_charged,
+        Status: result[0].Status,
+        Hearing_date: result[0].Hearing_date,
+        Appeal_cut_date: result[0].Appeal_cut_date,
+      };
+      return res.json({ success: true, crime });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.put('/api/updateCrime/:id', (req, res) => {
+  const crimeId = req.params.id;
+  const { Criminal_ID, Classification, Date_charged, Status, Hearing_date, Appeal_cut_date } = req.body;
+
+  const q = `UPDATE Crimes SET Criminal_ID = ?, Classification = ?, Date_charged = ?, Status = ?, Hearing_date = ?, Appeal_cut_date = ? WHERE Crime_ID = ?`;
+  db.query(q, [Criminal_ID, Classification, Date_charged, Status, Hearing_date, Appeal_cut_date, crimeId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.affectedRows > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.delete('/api/deleteCrime/:id', (req, res) => {
+  const crimeId = req.params.id;
+
+  const q = `DELETE FROM Crimes WHERE Crime_ID = ?`;
+  db.query(q, [crimeId], (err, result) => {
+    if (err) return res.json(err);
+
+    if (result.affectedRows > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  });
+});
+
+app.post('/api/addCrime', (req, res) => {
+  const { Criminal_ID, Classification, Date_charged, Status, Hearing_date, Appeal_cut_date } = req.body;
+  
+  const q = `INSERT INTO Crimes (Criminal_ID, Classification, Date_charged, Status, Hearing_date, Appeal_cut_date) VALUES (?, ?, ?, ?, ?, ?)`;
+  const values = [Criminal_ID, Classification, Date_charged, Status, Hearing_date, Appeal_cut_date];
+
+  db.query(q, values, (err, result) => {
+      if (err) {
+          console.error('Error adding crime:', err);
+          return res.json({ success: false });
+      }
+
+      return res.json({ success: true, insertedId: result.insertId });
+  });
+});

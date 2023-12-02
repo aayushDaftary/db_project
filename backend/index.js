@@ -11,7 +11,7 @@ app.use(cors())
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"pass",
+    password:"password",
     database:"cityjail",
     port: '3306'
 })
@@ -322,7 +322,7 @@ app.get('/api/getAliases/:id', (req, res) => {
         return res.json({ success: true, affectedRows: result.affectedRows });
     });
 });
-  /*
+  
   app.delete('/api/deleteAlias/:criminalId/:aliasId', (req, res) => {
     const { criminalId, aliasId } = req.params;
   
@@ -337,7 +337,7 @@ app.get('/api/getAliases/:id', (req, res) => {
       }
     });
 });
-*/
+
 
 app.post('/api/addAlias', (req, res) => {
     const { criminalId, alias } = req.body;
@@ -355,41 +355,41 @@ app.post('/api/addAlias', (req, res) => {
     });
 });
 
-app.get('/api/getCharge/:id', (req, res) => {
-  const chargeID = req.params.id;
-  const q = `SELECT * FROM Crime_charges WHERE Charge_ID = ?`;
-  db.query(q, [chargeID], (err, result) => {
-    if (err) return res.json(err);
+// app.get('/api/getCharge/:id', (req, res) => {
+//   const chargeID = req.params.id;
+//   const q = `SELECT * FROM Crime_charges WHERE Charge_ID = ?`;
+//   db.query(q, [chargeID], (err, result) => {
+//     if (err) return res.json(err);
 
-    if (result.length > 0) {
-      const charge = {
-          crime_id: result[0].Crime_ID,
-          crime_code: result[0].Crime_code,
-          status: result[0].Charge_status,
-          fine: result[0].Fine_amount,
-          fee: result[0].Court_fee,
-          paid: result[0].Amount_paid,
-          due: result[0].Pay_due_date,
-        };
-      return res.json({ success: true, charge });
-    } else {
-      return res.json({ success: false });
-    }
-  });
-});
+//     if (result.length > 0) {
+//       const charge = {
+//           crime_id: result[0].Crime_ID,
+//           crime_code: result[0].Crime_code,
+//           status: result[0].Charge_status,
+//           fine: result[0].Fine_amount,
+//           fee: result[0].Court_fee,
+//           paid: result[0].Amount_paid,
+//           due: result[0].Pay_due_date,
+//         };
+//       return res.json({ success: true, charge });
+//     } else {
+//       return res.json({ success: false });
+//     }
+//   });
+// });
 
-app.put('/api/updateCharge/:id', (req, res) => {
-  const chargeID = req.params.id;
-  const updatedCharge = req.body; 
-  const q = `UPDATE Crime_charges SET ? WHERE Charge_ID = ?`;
-  db.query(q, [updatedCharge, chargeID], (err, result) => {
-    if (err) {
-      console.error('Error updating charge information:', err);
-      return res.json({ success: false });
-    }
-    return res.json({ success: true });
-  });
-});
+// app.put('/api/updateCharge/:id', (req, res) => {
+//   const chargeID = req.params.id;
+//   const updatedCharge = req.body; 
+//   const q = `UPDATE Crime_charges SET ? WHERE Charge_ID = ?`;
+//   db.query(q, [updatedCharge, chargeID], (err, result) => {
+//     if (err) {
+//       console.error('Error updating charge information:', err);
+//       return res.json({ success: false });
+//     }
+//     return res.json({ success: true });
+//   });
+// });
 
 app.listen(3300, ()=>{
     console.log("Connected to backend!")

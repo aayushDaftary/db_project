@@ -489,7 +489,6 @@ app.get('/api/getProbOfficer/:id', (req, res) => {
   });
 });
 
-// Update a probation officer by ID
 app.put('/api/updateProbOfficer/:id', (req, res) => {
   const probId = req.params.id;
   const { Last, First, Street, City, State, Zip, Phone, Email, Status } = req.body;
@@ -500,7 +499,6 @@ app.put('/api/updateProbOfficer/:id', (req, res) => {
   });
 });
 
-// Delete a probation officer by ID
 app.delete('/api/deleteProbOfficer/:id', (req, res) => {
   const probId = req.params.id;
   const q = `DELETE FROM Prob_officers WHERE Prob_ID = ?`;
@@ -516,5 +514,57 @@ app.post('/api/addProbOfficer', (req, res) => {
   db.query(q, [Last, First, Street, City, State, Zip, Phone, Email, Status], (err, result) => {
     if (err) return res.json(err);
     return res.json({ success: true, insertedId: result.insertId });
+  });
+});
+
+app.get('/api/getOfficer/:id', (req, res) => {
+  const officerId = req.params.id;
+  const q = `SELECT * FROM Officers WHERE Officer_ID = ?`;
+  db.query(q, [officerId], (err, result) => {
+    if (err) return res.json(err);
+    if (result.length > 0) {
+      const officer = {
+        Last: result[0].Last,
+        First: result[0].First,
+        Precinct: result[0].Precinct,
+        Badge: result[0].Badge,
+        Phone: result[0].Phone,
+        Status: result[0].Status,
+      };
+    return res.json({ success: true, officer });
+    }
+    else {
+      return res.json({ success: false });
+    }
+  
+  });
+});
+
+app.put('/api/updateOfficer/:id', (req, res) => {
+  const officerId = req.params.id;
+  const { Last, First, Precinct, Badge, Phone, Status } = req.body;
+  const q = `UPDATE Officers SET Last = ?, First = ?, Precinct = ?, Badge = ?, Phone = ?, Status = ? WHERE Officer_ID = ?`;
+  db.query(q, [Last, First, Precinct, Badge, Phone, Status, officerId], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({ success: true });
+  });
+});
+
+app.delete('/api/deleteOfficer/:id', (req, res) => {
+  const officerId = req.params.id;
+  const q = `DELETE FROM Officers WHERE Officer_ID = ?`;
+  db.query(q, [officerId], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({ success: true });
+  });
+});
+
+app.post('/api/addOfficer', (req, res) => {
+  console.log(req.body);
+  const { Last, First, Precinct, Badge, Phone, Status } = req.body;
+  const q = `INSERT INTO Officers (Last, First, Precinct, Badge, Phone, Status) VALUES (?, ?, ?, ?, ?, ?)`;
+  db.query(q, [Last, First, Precinct, Badge, Phone, Status], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({ success: true });
   });
 });

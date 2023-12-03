@@ -131,8 +131,8 @@ function AliasInfo({setAuth}) {
             </div>
           <div>
             {aliases.map((alias) => (
-              <div key={alias.aliasID}>
-                <p className='alias-attr' style={{transform: `translate(443px, -50px)`}}>Alias: {alias.alias}</p>
+              <div key={alias.aliasID} style={{transform: `translate(420px, -50px)`}}>
+                <p className='alias-attr'>Alias: {alias.alias}</p>
                 <label>
                   <div className='alias-attr'>
                     Update Alias:

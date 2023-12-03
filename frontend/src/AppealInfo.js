@@ -115,74 +115,74 @@ function AppealInfo({setAuth}) {
     <div>
       <NavBar />
       <SignOut setAuth={setAuth} />
-      <form style={styles.form}>
-        <div className="appealID">
-          <Text style={styles.authText}>Appeal ID:</Text>
+      <form>
+        <div className='info-container'>
+            <div className='info-label'>View/Change Appeal Information</div>
+            <div className='id-label'>Appeal ID:</div>
+            <input type="text" name="appealId" className="id-input" placeholder={"Enter ID Here"} onChange={handleChange} />
+            <button type="submit" name="fetchAppeal" className="info-button" onClick={handleFetchAppeal}>Enter</button>
         </div>
-        <input type="text" name="appealId" className="appeal-id-text" onChange={handleChange} />
-
-        <button type="submit" name="fetchAppeal" className="fetch-appeal" onClick={handleFetchAppeal}>
-          <Text style={styles.buttonText}>Fetch Appeal</Text>
-        </button>
 
         {appealInfo && (
-          <div style={styles.appealInfoContainer}>
-            <Text style={styles.infoText}>Appeal Info:</Text>
-            <p>Crime ID: {appealInfo.crimeId}</p>
-            <p>Filing Date: {appealInfo.filingDate}</p>
-            <p>Hearing Date: {appealInfo.hearingDate}</p>
-            <p>Status: {appealInfo.status}</p>
+          <div>
+          <div className='attr-container'>
+            <p className='attr'>Crime ID: {appealInfo.crimeId}</p>
+            <p className='attr'>Filing Date: {appealInfo.filingDate}</p>
+            <p className='attr'>Hearing Date: {appealInfo.hearingDate}</p>
+            <p className='attr'>Status: {appealInfo.status}</p>
           </div>
-        )}
-
-{appealInfo && (
-  <div style={styles.editContainer}>
-    <Text style={styles.infoText}>Edit Appeal:</Text>
-    <label>
-      Crime ID:
-      <input
-        type="text"
-        value={editedAppeal.crimeId || ''}
-        name="crimeId"
-        onChange={handleEditAppealChange}
-      />
-    </label>
-    <label>
-      Filing Date:
-      <input
-        type="text"
-        value={editedAppeal.filingDate || ''}
-        name="filingDate"  
-        onChange={handleEditAppealChange}
-      />
-    </label>
-    <label>
-      Hearing Date:
-      <input
-        type="text"
-        value={editedAppeal.hearingDate || ''}
-        name="hearingDate"  
-        onChange={handleEditAppealChange}
-      />
-    </label>
-    <label>
-      Status:
-      <input
-        type="text"
-        value={editedAppeal.status || ''}
-        name="status"
-        onChange={handleEditAppealChange}
-      />
-    </label>
-            <button type="button" onClick={handleConfirmAppeal}>
-              <Text style={styles.buttonText}>Confirm Appeal Update</Text>
-            </button>
-            <button type="button" onClick={handleDeleteAppeal}>
-              <Text style={styles.buttonText}>Delete Appeal</Text>
-            </button>
-          </div>
-        )}
+        
+          <div style={styles.editContainer}>
+            <Text style={styles.infoText}>Edit Appeal:</Text>
+            <label>
+              Crime ID:
+              <input
+                type="text"
+                value={editedAppeal.crimeId || ''}
+                name="crimeId"
+                onChange={handleEditAppealChange}
+              />
+            </label>
+            <label>
+              Filing Date:
+              <input
+                type="text"
+                value={editedAppeal.filingDate || ''}
+                name="filingDate"  // Change this
+                onChange={handleEditAppealChange}
+              />
+            </label>
+            <label>
+              Hearing Date:
+              <input
+                type="text"
+                value={editedAppeal.hearingDate || ''}
+                name="hearingDate"  // And this
+                onChange={handleEditAppealChange}
+              />
+            </label>
+            <label>
+              Status:
+              <input
+                type="text"
+                value={editedAppeal.status || ''}
+                name="status"
+                onChange={handleEditAppealChange}
+              />
+            </label>
+                    <button type="button" onClick={handleConfirmAppeal}>
+                      <Text style={styles.buttonText}>Confirm Appeal Update</Text>
+                    </button>
+                    <button type="button" onClick={handleDeleteAppeal}>
+                      <Text style={styles.buttonText}>Delete Appeal</Text>
+                    </button>
+                  </div>
+                </div>
+              )}
       </form>
+
+
+
       <form>
         <div className="crime_id">
           <Text style={styles.authText}>Crime ID:</Text>

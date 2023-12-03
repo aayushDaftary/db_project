@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import RequireAuth from './RequireAuth';
 import AuthForm from './AuthForm';
@@ -20,7 +20,12 @@ import ChargeInfo from './ChargeInfo'
 import SentenceInfo from './SentenceInfo';
 
 function App() {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(JSON.parse(localStorage.getItem('auth')) || false);
+
+  // Save auth state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('auth', JSON.stringify(auth));
+  }, [auth]);
   return (
     <BrowserRouter>
       <Routes>

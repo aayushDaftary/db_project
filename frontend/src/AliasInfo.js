@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Text, StyleSheet } from 'react-native';
 import NavBar from './NavBar';
 import SignOut from './SignOut';
 
@@ -114,7 +113,7 @@ function AliasInfo({setAuth}) {
       
       <NavBar />
       <SignOut setAuth={setAuth}/>
-      <form style={styles.form}>
+      <form>
         <div className='info-container'>
           <div className='info-label'>View/Change Alias Information</div>
           <div className='id-label'>Criminal ID:</div>
@@ -156,54 +155,18 @@ function AliasInfo({setAuth}) {
         )}
       </form>
       <form>
-        <div className="criminal_id">
-                <Text style={styles.authText}>Criminal ID:</Text>
-            </div>
-            <input type="id" name ="criminalId" className="crim-id-text" onChange={handleNewChange}/>
-
-            <div className="alias_name"> 
-                <Text style={styles.authText}>Alias:</Text>
-            </div>
-            <input type="Alias" name ="alias" className="alias-text" onChange={handleNewChange}/>
-
-            <button type="submit" name="add" className="add-person" onClick={handleAdd}>
-                <Text style={styles.buttonText}>Add Alias</Text>
-            </button>
+        <div className='new-container'>
+          <div className='new-label'>Add New Alias Info:</div>
+        </div>
+        <div className='attr' style={{transform: `translate(0px, 15px)`}}>
+            <input type="Alias" name ="alias" className="alias" onChange={handleNewChange}/>
+            <button type="submit" name="add" className="alias-button" onClick={handleAdd}>Add Alias</button>
+          </div>
+        
 
       </form> 
     </div>
   );
 }
-
-const styles = StyleSheet.create({
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 5,
-  },
-  aliasContainer: {
-    textAlign: 'center',
-    marginTop: 1,
-  },
-  authText: {
-    fontSize: 35,
-    fontWeight: 'normal',
-    color: 'black',
-    marginBottom: 10,
-  },
-  buttonText: {
-    fontSize: 24,
-    fontWeight: 'normal',
-    color: 'purple',
-  },
-  infoText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'blue',
-    marginTop: 20,
-  },
-});
 
 export default AliasInfo;

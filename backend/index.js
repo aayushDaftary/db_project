@@ -30,8 +30,8 @@ const db = mysql.createConnection({
 /* api call for user sign in */
 app.post('/api/signin', (req,res)=>{
     const {username, password} = req.body;
-    const authorize = `SELECT * FROM Users WHERE username = '${username}' AND password = '${password}'`
-    const values = {username, password};
+    const authorize = `SELECT * FROM Users WHERE username = ? AND password = ?`
+    const values = [username, password];
     db.query(authorize, values, (err, data)=>{
         if (err) return res.json(err);
         if (data.length > 0) {
@@ -113,9 +113,10 @@ app.get('/api/search-criminals', (req, res)=>{
                CONCAT(Street, ', ', City, ', ', State, ', ', Zip) AS Address,
                Phone 
                FROM Criminals
-               WHERE Criminal_ID LIKE "%${search}%" 
-               OR CONCAT(First, ' ', Last) LIKE "%${search}%";`
-    db.query(q, {search}, (err, data)=>{
+               WHERE Criminal_ID LIKE ? 
+               OR CONCAT(First, ' ', Last) LIKE ?;`
+    const searchParam = `%${search}%`;
+    db.query(q, [searchParam, searchParam], (err, data)=>{
         if (err) return res.json(err);
         return res.json(data);
     }); 
@@ -146,8 +147,9 @@ app.get('/api/search-sentences', (req, res)=>{
              Start_date,
              End_date 
              FROM Sentences
-             WHERE Sentence_ID LIKE "%${search}%";`
-  db.query(q, {search}, (err, data)=>{
+             WHERE Sentence_ID LIKE ?;`
+  const searchParam = `%${search}%`;
+  db.query(q, [searchParam], (err, data)=>{
       if (err) return res.json(err);
       return res.json(data);
   }); 
@@ -179,11 +181,12 @@ app.get('/api/search-officers', (req, res)=>{
              Phone,
              Status 
              FROM Officers
-             WHERE Officer_ID LIKE "%${search}%" 
-             OR CONCAT(First, ' ', Last) LIKE "%${search}%"
-             OR Precinct LIKE "%${search}%"
-             OR Badge LIKE "%${search}%";`
-  db.query(q, {search}, (err, data)=>{
+             WHERE Officer_ID LIKE ?
+             OR CONCAT(First, ' ', Last) LIKE ?
+             OR Precinct LIKE ?
+             OR Badge LIKE ?;`
+  const searchParam = `%${search}%`;
+  db.query(q, [searchParam, searchParam, searchParam, searchParam], (err, data)=>{
       if (err) return res.json(err);
       return res.json(data);
   }); 
@@ -216,8 +219,9 @@ app.get('/api/search-crimes', (req, res)=>{
              Hearing_date,
              Appeal_cut_date 
              FROM Crimes
-             WHERE Crime_ID LIKE "%${search}%";`
-  db.query(q, {search}, (err, data)=>{
+             WHERE Crime_ID LIKE ?;`
+  const searchParam = `%${search}%`;
+  db.query(q, [searchParam], (err, data)=>{
       if (err) return res.json(err);
       return res.json(data);
   }); 
@@ -252,8 +256,9 @@ app.get('/api/search-charges', (req, res)=>{
              Amount_paid,
              Pay_due_date 
              FROM Crime_charges
-             WHERE Charge_ID LIKE "%${search}%";`
-  db.query(q, {search}, (err, data)=>{
+             WHERE Charge_ID LIKE ?;`
+  const searchParam = `%${search}%`;
+  db.query(q, [searchParam], (err, data)=>{
       if (err) return res.json(err);
       return res.json(data);
   }); 

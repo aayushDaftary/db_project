@@ -504,4 +504,20 @@
     font-size: 30px;
     text-align: center;
   }
-  
+
+  .alias-attr {
+    color: black;
+    font-size: 18px;
+    font-family: 'Roboto';
+    padding-bottom: 5px;
+  }
+
+  .alias-button {
+    background-color: #d9d9d9;
+    width: 90px;
+    height: 40px;
+    color: black;
+    font-family: 'Roboto';
+    padding: 10px;
+  }
+

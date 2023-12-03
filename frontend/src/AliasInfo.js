@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Text, StyleSheet } from 'react-native';
 import NavBar from './NavBar';
-import { useNavigate } from 'react-router-dom';
 import SignOut from './SignOut';
 
 function AliasInfo({setAuth}) {
-  const navigate = useNavigate();
   const [criminalId, setCriminalId] = useState('');
   const [aliases, setAliases] = useState([]);
   const [editedAliases, setEditedAliases] = useState({});
@@ -117,8 +115,6 @@ function AliasInfo({setAuth}) {
       
       <NavBar />
       <SignOut setAuth={setAuth}/>
-
-      
       <form style={styles.form}>
         <div className='info-container'>
           <div className='info-label'>View/Change Alias Information</div>
@@ -127,36 +123,36 @@ function AliasInfo({setAuth}) {
           <button type="submit" name="fetchCriminal" className="info-button" onClick={handleFetchAliases}>Enter</button>
         </div>
 
-        {criminalInfo && (
-          <div style={styles.criminalInfoContainer}>
-            <Text style={styles.infoText}>Criminal Info:</Text>
-            <p>First Name: {criminalInfo.first}</p>
-            <p>Last Name: {criminalInfo.last}</p>
-          </div>
-        )}
-
-        {aliases.length > 0 && (
-          <div style={styles.aliasContainer}>
-            <Text style={styles.infoText}>Aliases:</Text>
+        {criminalInfo && aliases.length > 0 && (
+          <div>
+            <div>
+            <p className='alias-attr'>First Name: {criminalInfo.first}</p>
+            <p className='alias-attr'>Last Name: {criminalInfo.last}</p>
+            </div>
+          <div>
             {aliases.map((alias) => (
               <div key={alias.aliasID}>
-                <p>Alias: {alias.alias}</p>
+                <p className='alias-attr'>Alias: {alias.alias}</p>
                 <label>
-                  Update Alias:
-                  <input
-                    type="text"
-                    value={editedAliases[alias.aliasID] || ''}
-                    onChange={(e) => handleEditAliasChange(alias.aliasID, e)}
-                  />
+                  <div className='alias-attr'>
+                    Update Alias:
+                    <input
+                      type="text"
+                      value={editedAliases[alias.aliasID] || ''}
+                      onChange={(e) => handleEditAliasChange(alias.aliasID, e)}
+                    />
+                  </div>
+                  <button type="button" className='alias-button' onClick={() => handleConfirmAlias(alias.aliasID)}>
+                    Update
+                  </button>
+                  <button type="button" className='alias-button' onClick={() => handleDeleteAlias(alias.aliasID)}>
+                    Delete Alias
+                  </button>
                 </label>
-                <button type="button" onClick={() => handleConfirmAlias(alias.aliasID)}>
-                  <Text style={styles.buttonText}>Confirm Alias Update</Text>
-                </button>
-                <button type="button" onClick={() => handleDeleteAlias(alias.aliasID)}>
-                  <Text style={styles.buttonText}>Delete Alias</Text>
-                </button>
+               
               </div>
             ))}
+          </div>
           </div>
         )}
       </form>

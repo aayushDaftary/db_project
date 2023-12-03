@@ -24,6 +24,13 @@ function CriminalInfo({setAuth}) {
     zip: '',
     phone: '',
   });
+  const [isPhoneValid, setPhoneValid] = useState(false);
+
+
+  const validatePhoneNumber = (phoneNumber) => {
+    const regex = /^[0-9]*$/;
+    return regex.test(phoneNumber);
+  };
 
   const handleChange = (e) => {
     setCriminalId(e.target.value);
@@ -68,6 +75,13 @@ function CriminalInfo({setAuth}) {
       ...newCriminal,
       [e.target.name]: e.target.value,
     });
+    if (e.target.name === 'phone') {
+      const isValid = validatePhoneNumber(e.target.value);
+      setPhoneValid(isValid);
+      if (!isValid) {
+        alert('Phone number should only contain numbers');
+      }
+    }
   };
 
   const handleConfirm = async () => {
@@ -259,8 +273,8 @@ function CriminalInfo({setAuth}) {
                 </label>
               </div>
               <div>
-                <button className='confirmation-button' type="button" onClick={handleInsert}>Add</button>
-              </div>            
+              <button className='confirmation-button' type="button" onClick={handleInsert} disabled={!isPhoneValid}>Add</button>              </div>            
+           
         </div>
       </form>
       <SignOut setAuth={setAuth}/>

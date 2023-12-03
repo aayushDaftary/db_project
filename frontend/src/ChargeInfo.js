@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
 import SignOut from './SignOut';
 
-function ChargeInfo() {
+function ChargeInfo({setAuth}) {
   const navigate = useNavigate();
   const [chargeId, setChargeId] = useState('');
   const [chargeInfo, setChargeInfo] = useState(null);
@@ -119,7 +119,7 @@ function ChargeInfo() {
   return (
     <div>
       <NavBar />
-      <SignOut />
+      <SignOut setAuth={setAuth} />
       <form style={styles.form}>
         <div className="chargeID">
           <Text style={styles.authText}>Charge ID:</Text>

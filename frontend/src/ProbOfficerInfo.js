@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import SignOut from './SignOut';
 import './Style.css'
 
-function ProbOfficer() {
+function ProbOfficer({setAuth}) {
   const navigate = useNavigate();
   const [probId, setProbId] = useState('');
   const [probOfficerInfo, setProbOfficerInfo] = useState(null);
@@ -114,7 +114,7 @@ function ProbOfficer() {
   return (
     <div>
       <NavBar />
-      <SignOut />
+      <SignOut setAuth={setAuth} />
       <div style={styles.form}>
         <div className="probID">
           <Text style={styles.authText}>Probation Officer ID:</Text>

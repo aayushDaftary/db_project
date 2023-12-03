@@ -2,10 +2,11 @@ import './Style.css'
 import {Text, StyleSheet} from 'react-native';
 import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 import axios from 'axios';
 
 
-function AuthForm() {
+function AuthForm({setAuth}) {
     const navigate = useNavigate()
     const [users, setUsers] = useState({
         username: "",
@@ -16,15 +17,17 @@ function AuthForm() {
         setUsers((prev)=>({...prev, [e.target.name]: e.target.value}));
     };
 
-    const handleSignIn = async e =>{
-        e.preventDefault()
+    const handleSignIn = async (e) =>{
+        e.preventDefault();
         try {
             await axios.post("http://localhost:3300/api/signin", users)
             .then(res => {
                 if (res.data.authorization) {
-                    alert("Signed in!")
-                    navigate("/cityjail/home")
+                    alert("Signed in!");
+                    setAuth(true);
+                    navigate("/cityjail/manage-info")
                 } else {
+                    console.log(res.data);
                     alert("Invalid credentials. Please try again.")
                 }
             })
@@ -67,6 +70,7 @@ function AuthForm() {
 
     return(
         <>
+        <NavBar />
         <div className="auth-title">
                 <Text style={styles.titleText}>City Jail Information Center</Text>
         </div>

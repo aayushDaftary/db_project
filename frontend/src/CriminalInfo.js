@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Text, StyleSheet } from 'react-native';
 import NavBar from './NavBar';
-import { useNavigate } from 'react-router-dom';
 import SignOut from './SignOut';
-import ManageInfo from './ManageInfo';
 
-function CriminalInfo() {
-  const navigate = useNavigate();
+function CriminalInfo({setAuth}) {
   const [criminalId, setCriminalId] = useState('');
   const [criminal, setCriminal] = useState(null);
   const [editedCriminal, setEditedCriminal] = useState({
@@ -267,53 +263,10 @@ function CriminalInfo() {
               </div>            
         </div>
       </form>
-
-      <ManageInfo />
-      <SignOut />
+      <SignOut setAuth={setAuth}/>
     </div>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 5,
-  },
-  infoContainer: {
-    textAlign: 'center',
-    marginTop: 1,
-  },
-  editContainer: {
-    textAlign: 'center',
-    marginTop: 1,
-  },
-  authText: {
-    fontSize: 35,
-    fontWeight: 'normal',
-    color: 'black',
-    marginBottom: 10,
-    
-  },
-  buttonText: {
-    fontSize: 24,
-    fontWeight: 'normal',
-    color: 'purple',
-  },
-  infoText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'blue',
-    marginTop: 20,
-  },
-});
 
 export default CriminalInfo;

@@ -3,9 +3,13 @@ import SignOut from "./SignOut";
 import {Text, StyleSheet} from 'react-native';
 import { useNavigate } from 'react-router-dom';
 import './Style.css'
+import axios from "axios";
 
-function ManageInformation() {
+function ManageInformation({setAuth}) {
     const navigate = useNavigate()
+
+    
+
     const navCriminalInfo = async e => {
         navigate('/cityjail/criminal-info')
     }
@@ -70,7 +74,7 @@ function ManageInformation() {
             <Text style = {styles.buttonText}>Charges Information</Text>
         </button>
 
-        <SignOut />
+        <SignOut setAuth={setAuth}/>
         </>
     )
 }

@@ -1,17 +1,28 @@
 import express from "express"
 import mysql from "mysql"
 import cors from "cors"
+import cookieParser from "cookie-parser"
+import session from "express-session"
+import module from "express"
 
 /* create express app */
 const app = express()
+const router = express.Router();
 app.use(express.json())
 app.use(cors())
+app.use(cookieParser());
+
+app.use(session({
+  secret: 'cityjail-auth-key2023', 
+  resave: false,
+  saveUninitialized: false,
+}));
 
 /* create database connection */
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"password",
+    password:"pass",
     database:"cityjail",
     port: '3306'
 })
@@ -20,12 +31,37 @@ const db = mysql.createConnection({
 app.post('/api/signin', (req,res)=>{
     const {username, password} = req.body;
     const authorize = `SELECT * FROM Users WHERE username = '${username}' AND password = '${password}'`
-    db.query(authorize, {username, password}, (err, data)=>{
+    const values = {username, password};
+    db.query(authorize, values, (err, data)=>{
         if (err) return res.json(err);
-        if (data.length > 0) return res.send({authorization: true})
+        if (data.length > 0) {
+          req.session.user = { username: values[0] };
+          return res.send({authorization: true})
+        }
         else return res.send({authorization: false});
     })
 })
+
+app.get('/sign-out', (req, res) =>{
+  req.session.destroy((err) => {
+    if (err) {
+      return res.json(err);
+    }
+    res.clearCookie('connect.sid');
+    res.json({ message: 'Logout successful' });
+  });
+})
+module.exports = router;
+
+/* authenticating user access to manage information */
+app.get('/auth-check', (req, res) => {
+  console.log('Session data:', req.session);
+  if (req.session.user) {
+    res.send({authorization: true});
+  } else {
+    res.send({authorization: false});
+  }
+});
 
 /* api call for checking duplicate users */
 app.post('/api/checkdup', (req, res) => {

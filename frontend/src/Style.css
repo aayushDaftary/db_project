@@ -1,7 +1,7 @@
 /* auth form */
 .auth-title {
     position: absolute;
-    top: 40px;
+    top: 100px;
     left: 420px;
     width: 600px;
     height: 270px;
@@ -11,7 +11,7 @@
   
   .username {
     position: absolute;
-    top: 350px;
+    top: 400px;
     left: 420px;
     width: 240px;
     height: 100px;
@@ -23,7 +23,7 @@
   
   .username-text {
     position: absolute;
-    top: 350px;
+    top: 400px;
     left: 660px;
     width: 360px;
     height: 97px;
@@ -36,7 +36,7 @@
   
   .password {
     position: absolute;
-    top: 450px;
+    top: 500px;
     left: 420px;
     width: 240px;
     height: 100px;
@@ -48,7 +48,7 @@
   
   .password-text {
     position: absolute;
-    top: 450px;
+    top: 500px;
     left: 660px;
     width: 360px;
     height: 97px;
@@ -61,7 +61,7 @@
 
   .sign-in {
     position:absolute;
-    top: 600px;
+    top: 650px;
     left: 420px;
     width: 200px;
     height: 90px;
@@ -74,7 +74,7 @@
 
   .create-account {
     position:absolute;
-    top: 600px;
+    top: 650px;
     left: 830px;
     width: 200px;
     height: 90px;

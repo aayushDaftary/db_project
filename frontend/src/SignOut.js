@@ -1,11 +1,19 @@
+import axios from 'axios';
 import './Style.css'
 import {Text, StyleSheet} from 'react-native';
 import { useNavigate } from 'react-router-dom';
 
-function SignOut() {
+function SignOut({setAuth}) {
     const navigate = useNavigate()
     const navAuth = async e =>{
-        navigate('/')
+        try {
+            await axios.get("http://localhost:3300/sign-out");
+            setAuth(false);
+            navigate('/');
+            alert("Signed out!");
+        } catch (err) {
+            console.error(err);
+        }
     }
     return (
         <button className='sign-out' onClick={navAuth}>

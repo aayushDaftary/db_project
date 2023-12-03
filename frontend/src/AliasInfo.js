@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
 import SignOut from './SignOut';
 
-function AliasInfo() {
+function AliasInfo({setAuth}) {
   const navigate = useNavigate();
   const [criminalId, setCriminalId] = useState('');
   const [aliases, setAliases] = useState([]);
@@ -116,16 +116,14 @@ function AliasInfo() {
     <div>
       
       <NavBar />
-      <SignOut />
+      <SignOut setAuth={setAuth}/>
       <form style={styles.form}>
-        <div className="criminalID">
-          <Text style={styles.authText}>Criminal ID:</Text>
+        <div className='info-container'>
+          <div className='info-label'>View/Change Alias Information</div>
+          <div className='id-label'>Criminal ID:</div>
+          <input type="text" name="id" className="id-input" placeholder={"Enter ID Here"} onChange={handleChange} />
+          <button type="submit" name="fetchCriminal" className="info-button" onClick={handleFetchAliases}>Enter</button>
         </div>
-        <input type="text" name="id" className="id-text" onChange={handleChange} />
-
-        <button type="submit" name="fetchAliases" className="fetch-aliases" onClick={handleFetchAliases}>
-          <Text style={styles.buttonText}>Fetch Aliases</Text>
-        </button>
 
         {criminalInfo && (
           <div style={styles.criminalInfoContainer}>

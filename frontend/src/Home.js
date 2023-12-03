@@ -3,11 +3,12 @@ import {Text, StyleSheet} from 'react-native';
 import NavBar from './NavBar'
 import { useNavigate } from 'react-router-dom';
 import SignOut from './SignOut'
+import axios from 'axios';
 
 function Home() {
     const navigate = useNavigate()
     const navManageInfo = async e => {
-        navigate('/cityjail/manage-info')
+        navigate('/cityjail/manage-info');
     }
 
     return(
@@ -19,7 +20,6 @@ function Home() {
         <button className="manage-info" onClick={navManageInfo}>
             <Text style={styles.infoText}>Manage Information</Text>
         </button>
-        <SignOut />
         </>
     )
 }

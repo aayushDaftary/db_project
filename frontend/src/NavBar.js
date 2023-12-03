@@ -5,7 +5,7 @@ import {Text, StyleSheet} from 'react-native';
 function NavBar() {
     const navigate = useNavigate()
     const navHome = async e => {
-        navigate('/cityjail/home')
+        navigate('/')
     }
     const navCriminals = async e =>{
         navigate('/cityjail/criminals')

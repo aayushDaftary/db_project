@@ -1,5 +1,4 @@
 import NavBar from "./NavBar";
-import SignOut from "./SignOut";
 import './Style.css'
 import {useState, useEffect} from "react";
 import {StyleSheet} from 'react-native';
@@ -9,7 +8,6 @@ import {Search} from 'react-feather';
 
 function Charges() {
     const [data, setData] = useState([]);
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(5);
     const [search, setSearch] = useState("");
@@ -37,19 +35,6 @@ function Charges() {
         setSearch(e.target.value);
     };
 
-    /* handling selection of rows */
-    const toggleSelection = (index) => {
-        const newSelectedRowKeys = [...selectedRowKeys];
-        if (newSelectedRowKeys.includes(index)) {
-          // Row is already selected, so remove it
-          newSelectedRowKeys.splice(newSelectedRowKeys.indexOf(index), 1);
-        } else {
-          // Row is not selected, so add it
-          newSelectedRowKeys.push(index);
-        }
-        setSelectedRowKeys(newSelectedRowKeys);
-    };
-
     /* pagination */
     const indexOfLastItem = currentPage * itemsPerPage;
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -69,7 +54,6 @@ function Charges() {
         <table className="d-table">
             <thead> 
                 <tr>
-                    <th>Select</th>
                     <th>Charge ID</th>
                     <th>Crime ID</th>
                     <th>Crime Code</th>
@@ -85,13 +69,6 @@ function Charges() {
                     data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                     .map((charge, index)=>{
                         return <tr key={index}>
-                            <td>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedRowKeys.includes(index)}
-                                    onChange={() => toggleSelection(index)}
-                                />
-                            </td>
                             <td>{charge.Charge_ID}</td>
                             <td>{charge.Crime_ID}</td>
                             <td>{charge.Crime_code}</td>
@@ -114,7 +91,6 @@ function Charges() {
                 </button>
             </div>
         </table>
-        <SignOut />
         </>
     )
 }

@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
 import SignOut from './SignOut';
 
-function SentenceInfo() {
+function SentenceInfo({setAuth}) {
   const navigate = useNavigate();
   const [sentenceId, setSentenceId] = useState('');
   const [sentenceInfo, setSentenceInfo] = useState(null);
@@ -101,7 +101,7 @@ function SentenceInfo() {
   return (
     <div>
       <NavBar />
-      <SignOut />
+      <SignOut setAuth={setAuth} />
       <form style={styles.form}>
         <div className="sentenceID">
           <Text style={styles.authText}>Sentence ID:</Text>

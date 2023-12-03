@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
 import SignOut from './SignOut';
 
-function AppealInfo() {
+function AppealInfo({setAuth}) {
   const navigate = useNavigate();
   const [appealId, setAppealId] = useState('');
   const [appealInfo, setAppealInfo] = useState(null);
@@ -115,7 +115,7 @@ function AppealInfo() {
   return (
     <div>
       <NavBar />
-      <SignOut />
+      <SignOut setAuth={setAuth} />
       <form style={styles.form}>
         <div className="appealID">
           <Text style={styles.authText}>Appeal ID:</Text>

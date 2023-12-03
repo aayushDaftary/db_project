@@ -22,7 +22,7 @@ app.use(session({
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"password",
+    password:"pass",
     database:"cityjail",
     port: '3306'
 })
@@ -30,7 +30,7 @@ const db = mysql.createConnection({
 /* api call for user sign in */
 app.post('/api/signin', (req,res)=>{
     const {username, password} = req.body;
-    const authorize = 'SELECT * FROM Users WHERE username = "?" AND password = "?";'
+    const authorize = 'SELECT * FROM Users WHERE username = ? AND password = MD5(?);'
     db.query(authorize, [username, password], (err, data)=>{
         console.log(data);
         if (err) return res.json(err);
@@ -66,7 +66,7 @@ app.get('/auth-check', (req, res) => {
 /* api call for checking duplicate users */
 app.post('/api/checkdup', (req, res) => {
     const { username } = req.body;
-    const checkDuplicateQuery = `SELECT * FROM Users WHERE username = "?";`
+    const checkDuplicateQuery = `SELECT * FROM Users WHERE username = ?;`
 
     db.query(checkDuplicateQuery, [username], (err, data) => {
         if (err) {
@@ -80,7 +80,7 @@ app.post('/api/checkdup', (req, res) => {
 /* api call for user create account */
 app.post('/api/createacc', (req, res) => {
     const { username, password } = req.body;
-    const createAccountQuery = `INSERT INTO Users (username, password) VALUES ("?", "?");`  
+    const createAccountQuery = `INSERT INTO Users (username, password) VALUES (?, MD5(?));`  
     db.query(createAccountQuery, [username, password], (err, data) => {
         if (err) {
             return res.json(err);

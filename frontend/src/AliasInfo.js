@@ -117,6 +117,8 @@ function AliasInfo({setAuth}) {
       
       <NavBar />
       <SignOut setAuth={setAuth}/>
+
+      
       <form style={styles.form}>
         <div className='info-container'>
           <div className='info-label'>View/Change Alias Information</div>

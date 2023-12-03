@@ -148,69 +148,84 @@ function ChargeInfo({setAuth}) {
 {chargeInfo && (
   <div style={styles.editContainer}>
     <Text style={styles.infoText}>Edit Charge:</Text>
-    <label>
-      Crime ID:
-      <input
-        type="text"
-        value={editedCharge.crimeId || ''}
-        name="crimeId"
-        onChange={handleEditChargeChange}
-      />
-    </label>
-    <label>
-      Crime Code:
-      <input
-        type="text"
-        value={editedCharge.crimeCode || ''}
-        name="crimeCode"
-        onChange={handleEditChargeChange}
-      />
-    </label>
-    <label>
-      Charge Status:
-      <input
-        type="text"
-        value={editedCharge.chargeStatus || ''}
-        name="chargeStatus"
-        onChange={handleEditChargeChange}
-      />
-    </label>
-    <label>
-      Fine Amount:
-      <input
-        type="text"
-        value={editedCharge.fineAmount || ''}
-        name="fineAmount"
-        onChange={handleEditChargeChange}
-      />
-    </label>
-    <label>
-      Court Fee:
-      <input
-        type="text"
-        value={editedCharge.courtFee || ''}
-        name="courtFee"
-        onChange={handleEditChargeChange}
-      />
-    </label>
-    <label>
-      Amount Paid:
-      <input
-        type="text"
-        value={editedCharge.amountPaid || ''}
-        name="amountPaid"
-        onChange={handleEditChargeChange}
-      />
-    </label>
-    <label>
-      Pay Due Date:
-      <input
-        type="date"
-        value={editedCharge.payDueDate || ''}
-        name="payDueDate"
-        onChange={handleEditChargeChange}
-      />
-    </label>
+    <div>
+      <label>
+        Crime ID:
+        <input
+          type="text"
+          value={editedCharge.crimeId || ''}
+          name="crimeId"
+          onChange={handleEditChargeChange}
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Crime Code:
+        <input
+          type="text"
+          value={editedCharge.crimeCode || ''}
+          name="crimeCode"
+          onChange={handleEditChargeChange}
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Charge Status:
+        <input
+          type="text"
+          value={editedCharge.chargeStatus || ''}
+          name="chargeStatus"
+          onChange={handleEditChargeChange}
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Fine Amount:
+        <input
+          type="text"
+          value={editedCharge.fineAmount || ''}
+          name="fineAmount"
+          onChange={handleEditChargeChange}
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Court Fee:
+        <input
+          type="text"
+          value={editedCharge.courtFee || ''}
+          name="courtFee"
+          onChange={handleEditChargeChange}
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Amount Paid:
+        <input
+          type="text"
+          value={editedCharge.amountPaid || ''}
+          name="amountPaid"
+          onChange={handleEditChargeChange}
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Pay Due Date:
+        <input
+          type="date"
+          value={editedCharge.payDueDate || ''}
+          name="payDueDate"
+          onChange={handleEditChargeChange}
+        />
+      </label>
+    </div>
+
     <button type="button" onClick={handleConfirmCharge}>
       <Text style={styles.buttonText}>Confirm Charge Update</Text>
     </button>
@@ -220,7 +235,8 @@ function ChargeInfo({setAuth}) {
   </div>
 )}
   </form>
-      <form>
+  <form>
+    <div style={{transform: 'translate(45%, 0%)'}}>
       <div className="crime_id">
         <Text style={styles.authText}>Crime ID:</Text>
       </div>
@@ -259,6 +275,7 @@ function ChargeInfo({setAuth}) {
       <button type="submit" name="addCharge" className="add-charge" onClick={handleAddCharge}>
         <Text style={styles.buttonText}>Add Charge</Text>
       </button>
+      </div>
     </form>
       
     </div>

@@ -153,12 +153,60 @@ function OfficerInfo({setAuth}) {
   
         <form onSubmit={handleAddOfficer}>
           <Text style={styles.infoText}>Add New Officer:</Text>
-          <input type="text" name="Last" value={newOfficer.Last} onChange={handleNewChange} placeholder="Last Name" />
-          <input type="text" name="First" value={newOfficer.First} onChange={handleNewChange} placeholder="First Name" />
-          <input type="text" name="Precinct" value={newOfficer.Precinct} onChange={handleNewChange} placeholder="Precinct" />
-          <input type="text" name="Badge" value={newOfficer.Badge} onChange={handleNewChange} placeholder="Badge" />
-          <input type="text" name="Phone" value={newOfficer.Phone} onChange={handleNewChange} placeholder="Phone" />
-          <input type="text" name="Status" value={newOfficer.Status} onChange={handleNewChange} placeholder="Status" />
+          <div>
+            <input
+              type="text"
+              name="Last"
+              value={newOfficer.Last}
+              onChange={handleNewChange}
+              placeholder="Last Name"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="First"
+              value={newOfficer.First}
+              onChange={handleNewChange}
+              placeholder="First Name"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="Precinct"
+              value={newOfficer.Precinct}
+              onChange={handleNewChange}
+              placeholder="Precinct"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="Badge"
+              value={newOfficer.Badge}
+              onChange={handleNewChange}
+              placeholder="Badge"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="Phone"
+              value={newOfficer.Phone}
+              onChange={handleNewChange}
+              placeholder="Phone"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="Status"
+              value={newOfficer.Status}
+              onChange={handleNewChange}
+              placeholder="Status"
+            />
+          </div>
           <button type="submit" name="addOfficer" className="add-officer">
             <Text style={styles.buttonText}>Add Officer</Text>
           </button>
@@ -183,7 +231,7 @@ const styles = {
   },
   buttonText: {
     fontSize: '16px',
-    color: '#fff',
+    color: 'black',
   },
   officerInfoContainer: {
     display: 'flex',

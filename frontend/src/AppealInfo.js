@@ -132,7 +132,6 @@ function AppealInfo({setAuth}) {
             <p className='attr'>Hearing Date: {appealInfo.hearingDate}</p>
             <p className='attr'>Status: {appealInfo.status}</p>
           </div>
-        
           <div style={styles.editContainer}>
             <Text style={styles.infoText}>Edit Appeal:</Text>
             <label>
@@ -185,6 +184,7 @@ function AppealInfo({setAuth}) {
 
 
       <form>
+      <div style={{transform: `translate(43%, 5%)`}}>
         <div className="crime_id">
           <Text style={styles.authText}>Crime ID:</Text>
         </div>
@@ -218,6 +218,7 @@ function AppealInfo({setAuth}) {
         <button type="submit" name="addAppeal" className="add-appeal" onClick={handleAddAppeal}>
           <Text style={styles.buttonText}>Add Appeal</Text>
         </button>
+      </div>
       </form>
     </div>
   );

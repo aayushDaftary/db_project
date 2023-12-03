@@ -124,14 +124,14 @@ function AliasInfo({setAuth}) {
 
         {criminalInfo && aliases.length > 0 && (
           <div>
-            <div>
-            <p className='alias-attr'>First Name: {criminalInfo.first}</p>
-            <p className='alias-attr'>Last Name: {criminalInfo.last}</p>
+            <div className='attr-container'>
+            <p className='attr'>First Name: {criminalInfo.first}</p>
+            <p className='attr'>Last Name: {criminalInfo.last}</p>
             </div>
           <div>
             {aliases.map((alias) => (
               <div key={alias.aliasID}>
-                <p className='alias-attr'>Alias: {alias.alias}</p>
+                <p className='alias-attr' style={{transform: `translate(443px, -50px)`}}>Alias: {alias.alias}</p>
                 <label>
                   <div className='alias-attr'>
                     Update Alias:

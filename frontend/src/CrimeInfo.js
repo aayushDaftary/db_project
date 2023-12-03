@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: '16px',
-    color: '#fff',
+    color: 'black',
   },
   crimeInfoContainer: {
     display: 'flex',

@@ -134,8 +134,8 @@ function ProbOfficer({setAuth}) {
         </div>
         <input type="text" name="probId" className="prob-id-text" onChange={handleChange} />
   
-        <button type="button" name="fetchProbOfficer" className="fetch-prob-officer" onClick={handleFetchProbOfficer}>
-          <Text style={styles.buttonText}>Fetch Probation Officer</Text>
+        <button type="button" name="fetchProbOfficer" className="prob-button" onClick={handleFetchProbOfficer}>
+          Enter
         </button>
   
         {probOfficerInfo && (
@@ -165,28 +165,49 @@ function ProbOfficer({setAuth}) {
             <input type="text" name="Phone" value={editedProbOfficer.Phone} onChange={handleEditProbOfficerChange} />
             <input type="text" name="Email" value={editedProbOfficer.Email} onChange={handleEditProbOfficerChange} />
             <input type="text" name="Status" value={editedProbOfficer.Status} onChange={handleEditProbOfficerChange} />
-            <button type="submit" name="confirmProbOfficer" className="confirm-prob-officer" onClick={handleConfirmProbOfficer}>
-              <Text style={styles.buttonText}>Confirm Changes</Text>
+            <button type="submit" name="confirmProbOfficer" className="prob-button" onClick={handleConfirmProbOfficer}>
+              Confirm
             </button>
-            <button type="submit" name="deleteProbOfficer" className="delete-prob-officer" onClick={handleDeleteProbOfficer}>
-              <Text style={styles.buttonText}>Delete Probation Officer</Text>
+            <button type="submit" name="deleteProbOfficer" className="prob-button" onClick={handleDeleteProbOfficer}>
+              Delete
             </button>
           </div>
         )}
   
         <form onSubmit={handleAddProbOfficer}>
-          <Text style={styles.infoText}>Add New Probation Officer:</Text>
-          <input type="text" name="Last" value={newProbOfficer.Last} onChange={handleNewChange} placeholder="Last Name" />
-          <input type="text" name="First" value={newProbOfficer.First} onChange={handleNewChange} placeholder="First Name" />
-          <input type="text" name="Street" value={newProbOfficer.Street} onChange={handleNewChange} placeholder="Street" />
-          <input type="text" name="City" value={newProbOfficer.City} onChange={handleNewChange} placeholder="City" />
-          <input type="text" name="State" value={newProbOfficer.State} onChange={handleNewChange} placeholder="State" />
-          <input type="text" name="Zip" value={newProbOfficer.Zip} onChange={handleNewChange} placeholder="Zip" />
-          <input type="text" name="Phone" value={newProbOfficer.Phone} onChange={handleNewChange} placeholder="Phone" />
-          <input type="text" name="Email" value={newProbOfficer.Email} onChange={handleNewChange} placeholder="Email" />
-          <input type="text" name="Status" value={newProbOfficer.Status} onChange={handleNewChange} placeholder="Status" />
-          <button type="submit" name="addProbOfficer" className="add-prob-officer">
-            <Text style={styles.buttonText}>Add Probation Officer</Text>
+        <div style={{transform: `translate(0%, 20%)`}}><Text style={styles.infoText}>Add New Probation Officer:</Text></div>
+        
+          <div style={{transform: `translate(18%, 5%)`}}>
+            <div>
+              <input type="text" name="Last" value={newProbOfficer.Last} onChange={handleNewChange} placeholder="Last Name" />
+            </div>
+            <div>
+              <input type="text" name="First" value={newProbOfficer.First} onChange={handleNewChange} placeholder="First Name" />
+            </div>
+            <div>
+              <input type="text" name="Street" value={newProbOfficer.Street} onChange={handleNewChange} placeholder="Street" />
+            </div>
+            <div>
+              <input type="text" name="City" value={newProbOfficer.City} onChange={handleNewChange} placeholder="City" />
+            </div>
+            <div>
+              <input type="text" name="State" value={newProbOfficer.State} onChange={handleNewChange} placeholder="State" />
+            </div>
+            <div>
+              <input type="text" name="Zip" value={newProbOfficer.Zip} onChange={handleNewChange} placeholder="Zip" />
+            </div>
+            <div>
+              <input type="text" name="Phone" value={newProbOfficer.Phone} onChange={handleNewChange} placeholder="Phone" />
+            </div>
+            <div>
+              <input type="text" name="Email" value={newProbOfficer.Email} onChange={handleNewChange} placeholder="Email" />
+            </div>
+            <div>
+              <input type="text" name="Status" value={newProbOfficer.Status} onChange={handleNewChange} placeholder="Status" />
+            </div>
+          </div>
+          <button type="submit" name="addProbOfficer" className="prob-button" style={{transform: `translate(45%, 30%)`}}>
+              Add Probation Officer
           </button>
         </form>
       </div>

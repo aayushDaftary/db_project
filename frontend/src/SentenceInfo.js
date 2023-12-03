@@ -126,51 +126,61 @@ function SentenceInfo({setAuth}) {
         {sentenceInfo && (
           <div style={styles.editContainer}>
             <Text style={styles.infoText}>Edit Sentence:</Text>
-            <label>
-              Criminal ID:
-              <input
-                type="text"
-                value={editedSentence.Criminal_ID || ''}
-                name="Criminal_ID"
-                onChange={handleEditSentenceChange}
-              />
-            </label>
-            <label>
-              Type:
-              <input
-                type="text"
-                value={editedSentence.Type || ''}
-                name="Type"
-                onChange={handleEditSentenceChange}
-              />
-            </label>
-            <label>
-              Probation ID:
-              <input
-                type="text"
-                value={editedSentence.Prob_ID || ''}
-                name="Prob_ID"
-                onChange={handleEditSentenceChange}
-              />
-            </label>
-            <label>
-              Start Date:
-              <input
-                type="date"
-                value={editedSentence.Start_date || ''}
-                name="Start_date"
-                onChange={handleEditSentenceChange}
-              />
-            </label>
-            <label>
-              End Date:
-              <input
-                type="date"
-                value={editedSentence.End_date || ''}
-                name="End_date"
-                onChange={handleEditSentenceChange}
-              />
-            </label>
+            <div>
+              <label>
+                Criminal ID:
+                <input
+                  type="text"
+                  value={editedSentence.Criminal_ID || ''}
+                  name="Criminal_ID"
+                  onChange={handleEditSentenceChange}
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                Type:
+                <input
+                  type="text"
+                  value={editedSentence.Type || ''}
+                  name="Type"
+                  onChange={handleEditSentenceChange}
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                Probation ID:
+                <input
+                  type="text"
+                  value={editedSentence.Prob_ID || ''}
+                  name="Prob_ID"
+                  onChange={handleEditSentenceChange}
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                Start Date:
+                <input
+                  type="date"
+                  value={editedSentence.Start_date || ''}
+                  name="Start_date"
+                  onChange={handleEditSentenceChange}
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                End Date:
+                <input
+                  type="date"
+                  value={editedSentence.End_date || ''}
+                  name="End_date"
+                  onChange={handleEditSentenceChange}
+                />
+              </label>
+            </div>
             <button type="button" onClick={handleConfirmSentence}>
               <Text style={styles.buttonText}>Confirm Sentence Update</Text>
             </button>
@@ -181,6 +191,7 @@ function SentenceInfo({setAuth}) {
         )}
       </form>
       <form>
+        <div style={{transform: `translate(44%, 0%)`}}>
         <div className="criminal_id">
           <Text style={styles.authText}>Criminal ID:</Text>
         </div>
@@ -209,6 +220,7 @@ function SentenceInfo({setAuth}) {
         <button type="submit" name="addSentence" className="add-sentence" onClick={handleAddSentence}>
           <Text style={styles.buttonText}>Add Sentence</Text>
         </button>
+        </div>
       </form>
     </div>
   );

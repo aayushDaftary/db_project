@@ -90,7 +90,6 @@ function CrimeInfo({setAuth}) {
 
       if (res.data.success) {
         alert('Crime Deletion successful');
-        // Fetch crime again after deletion
         handleFetchCrime({ preventDefault: () => {} });
       } else {
         alert('Crime Deletion failed');

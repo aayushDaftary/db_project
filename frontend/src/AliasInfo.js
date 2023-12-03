@@ -82,7 +82,6 @@ function AliasInfo({setAuth}) {
 
       if (res.data.success) {
         alert('Alias Deletion successful');
-        // Fetch aliases again after deletion
         handleFetchAliases({ preventDefault: () => {} });
       } else {
         alert('Alias Deletion failed');

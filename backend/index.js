@@ -22,7 +22,7 @@ app.use(session({
 const db = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"pass",
+    password:"password",
     database:"cityjail",
     port: '3306'
 })
@@ -347,6 +347,18 @@ app.get('/api/getAliases/:id', (req, res) => {
       } else {
         return res.json({ success: false });
       }
+    });
+  });
+
+  app.put('/api/updateAlias/:id', (req, res) => {
+    const criminalId = req.params.id;
+    const { aliasID, updatedAlias } = req.body;
+    const q = `UPDATE Aliases SET Alias = ? WHERE Criminal_ID = ? AND Alias_ID = ?`;
+    const values = [updatedAlias, criminalId, aliasID];
+    
+    db.query(q, values, (err, result) => {
+      if (err) return res.json({ success: false, error: err });
+      return res.json({ success: true, affectedRows: result.affectedRows });
     });
   });
   

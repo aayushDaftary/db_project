@@ -23,8 +23,17 @@ function ProbOfficer({setAuth}) {
     Status: '',
   });
 
+  const validatePhoneNumber = (input_str) => {
+    var phoneno = /^\d+$/;
+    return phoneno.test(input_str);
+  };
+  
   const handleNewChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'Phone' && !validatePhoneNumber(value)) {
+      alert('Phone number should only contain numbers');
+      return;
+    }
     setNewProbOfficer(prevProbOfficer => ({
       ...prevProbOfficer,
       [name]: value
@@ -60,6 +69,10 @@ function ProbOfficer({setAuth}) {
 
   const handleEditProbOfficerChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'Phone' && !validatePhoneNumber(value)) {
+      alert('Phone number should only contain numbers');
+      return;
+    }
     setEditedProbOfficer(prevProbOfficer => ({
       ...prevProbOfficer,
       [name]: value

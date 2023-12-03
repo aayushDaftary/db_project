@@ -30,12 +30,12 @@ const db = mysql.createConnection({
 /* api call for user sign in */
 app.post('/api/signin', (req,res)=>{
     const {username, password} = req.body;
-    const authorize = `SELECT * FROM Users WHERE username = ? AND password = ?`
-    const values = [username, password];
-    db.query(authorize, values, (err, data)=>{
+    const authorize = 'SELECT * FROM Users WHERE username = "?" AND password = "?";'
+    db.query(authorize, [username, password], (err, data)=>{
+        console.log(data);
         if (err) return res.json(err);
         if (data.length > 0) {
-          req.session.user = { username: values[0] };
+          req.session.user = { username: data[0].username };
           return res.send({authorization: true})
         }
         else return res.send({authorization: false});
@@ -66,13 +66,12 @@ app.get('/auth-check', (req, res) => {
 /* api call for checking duplicate users */
 app.post('/api/checkdup', (req, res) => {
     const { username } = req.body;
-    const checkDuplicateQuery = `SELECT * FROM Users WHERE username = ?`;
+    const checkDuplicateQuery = `SELECT * FROM Users WHERE username = "?";`
 
     db.query(checkDuplicateQuery, [username], (err, data) => {
         if (err) {
             return res.json(err);
         }
-
         const isDuplicate = data.length > 0;
         return res.json({ duplicate: isDuplicate });
     });
@@ -81,14 +80,14 @@ app.post('/api/checkdup', (req, res) => {
 /* api call for user create account */
 app.post('/api/createacc', (req, res) => {
     const { username, password } = req.body;
-    const createAccountQuery = `INSERT INTO Users (username, password) VALUES (?, ?)`;
-
-    db.query(createAccountQuery, [username, password], (err, result) => {
+    const createAccountQuery = `INSERT INTO Users (username, password) VALUES ("?", "?");`  
+    db.query(createAccountQuery, [username, password], (err, data) => {
         if (err) {
             return res.json(err);
+        } else {
+            console.log(data);
+            return res.json({message: "Account created"});
         }
-
-        return res.json({ success: true, insertedId: result.insertId });
     });
 });
 

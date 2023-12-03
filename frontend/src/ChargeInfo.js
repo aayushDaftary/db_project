@@ -39,7 +39,6 @@ function ChargeInfo({setAuth}) {
   
     try {
       const resCharge = await axios.get(`http://localhost:3300/api/getCharge/${chargeId}`);
-      console.log('Server response:', resCharge.data);  // Log server response
   
       if (resCharge.data.success) {
         const charge = resCharge.data.charge;
@@ -53,7 +52,6 @@ function ChargeInfo({setAuth}) {
         }
         setChargeInfo(charge);
         setEditedCharge(charge);
-        console.log('Updated chargeInfo', charge);  // Log updated state
       } 
       else {
         alert('Charge does not exist');

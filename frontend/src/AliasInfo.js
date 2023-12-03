@@ -81,7 +81,6 @@ function AliasInfo({setAuth}) {
 
       if (res.data.success) {
         alert('Alias Deletion successful');
-        // Fetch aliases again after deletion
         handleFetchAliases({ preventDefault: () => {} });
       } else {
         alert('Alias Deletion failed');
@@ -92,11 +91,13 @@ function AliasInfo({setAuth}) {
   };
 
   const handleAdd = async e => {
-    //e.preventDefault();
+    e.preventDefault();
+    console.log(newAlias);
     try{
       const res = await axios.post(`http://localhost:3300/api/addAlias`, newAlias);
       if(res.data.success){
         alert('Successfully added');
+        handleFetchAliases({ preventDefault: () => {} });
       }
       else{
         alert('Unsuccessful')
@@ -160,7 +161,8 @@ function AliasInfo({setAuth}) {
           <div className='new-label'>Add New Alias Info:</div>
         </div>
         <div className='attr' style={{transform: `translate(0px, 15px)`}}>
-            <input type="Alias" name ="alias" className="alias" onChange={handleNewChange}/>
+            <input type="text" name="criminalId" className="criminalId" placeholder="Criminal ID" onChange={handleNewChange} />
+            <input type="Alias" name ="alias" className="alias" placeholder = "Alias" onChange={handleNewChange}/>
             <button type="submit" name="add" className="alias-button" onClick={handleAdd}>Add Alias</button>
           </div>
         

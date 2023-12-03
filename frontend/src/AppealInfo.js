@@ -42,7 +42,7 @@ function AppealInfo({setAuth}) {
         const appeal = resAppeal.data.appeal;
         console.log('filingDate:', new Date(appeal.filingDate).toISOString().substring(0, 10));
         console.log('hearingDate:', new Date(appeal.hearingDate).toISOString().substring(0, 10));
-        console.log('Fetched Appeal:', appeal);  // Add this line
+        console.log('Fetched Appeal:', appeal);  
         appeal.filingDate = new Date(appeal.filingDate).toISOString().substring(0, 10);
         appeal.hearingDate = new Date(appeal.hearingDate).toISOString().substring(0, 10);
         console.log('filingDate:', new Date(appeal.filingDate).toISOString().substring(0, 10));
@@ -86,7 +86,6 @@ function AppealInfo({setAuth}) {
 
       if (res.data.success) {
         alert('Appeal Deletion successful');
-        // Fetch appeal again after deletion
         handleFetchAppeal({ preventDefault: () => {} });
       } else {
         alert('Appeal Deletion failed');
